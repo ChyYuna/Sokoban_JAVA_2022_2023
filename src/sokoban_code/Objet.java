@@ -1,6 +1,6 @@
 package sokoban_code;
 
-public class Objet {
+public abstract class Objet {
 	//Attribut 
 	private int m_x, m_y;
 	
