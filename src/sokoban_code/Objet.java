@@ -42,7 +42,7 @@ public abstract class Objet {
 	
 	/**
 	 * Permet de modifier la coordonnee y de l'objet
-	 * @param newX entier contenant la nouvelle coordonnee y de l'objet
+	 * @param newY entier contenant la nouvelle coordonnee y de l'objet
 	 * 
 	 */
 	public void setY(int newY) {m_y = newY;}

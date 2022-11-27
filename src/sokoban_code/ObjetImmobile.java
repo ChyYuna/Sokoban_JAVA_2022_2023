@@ -1,6 +1,6 @@
 package sokoban_code;
 
-public abstract class ObjetImmobile extends Objet{
+public class ObjetImmobile extends Objet{
 	//Attributs
 		private char m_type;
 		
