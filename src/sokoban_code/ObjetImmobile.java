@@ -24,7 +24,7 @@ public class ObjetImmobile extends Objet{
 	//Methodes
 	/**
 	 * Donne acces au type de l'objet immobile ("#" : mur, "." : cible, "_" : vide)
-	 * @param caractere contenant le type de l'objet immobile
+	 * @return caractere contenant le type de l'objet immobile
 	 */
 	public int getType() {return m_type;}
 	
