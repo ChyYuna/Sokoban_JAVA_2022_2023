@@ -14,5 +14,6 @@ public class Caisse extends ObjetMobile{
 	*/	
 	public Caisse(int x, int y) {
 		super(x,y);
+		setImg(":/images/Caisse/caisse.png");
 	}
 }

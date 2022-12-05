@@ -18,5 +18,6 @@ public class Personnage extends ObjetMobile{
 	 */	
 	public Personnage(int x, int y) {
 		super(x,y);
+		setImg(":/images/Joueur/playerDown.png");
 	}
 }

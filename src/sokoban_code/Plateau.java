@@ -1,5 +1,8 @@
 package sokoban_code;
 
+import java.io.*;
+import java.util.Scanner;
+
 public class Plateau extends Objet{
 	//Attributs
     private int m_largeur=5, m_longueur=5;
@@ -10,6 +13,7 @@ public class Plateau extends Objet{
 	 * Constructeur par defaut 
 	 */
 	public Plateau() {
+		super(); 
 		tab = new ObjetImmobile[m_longueur][m_largeur];
 		for (int i=0; i<m_largeur; i++){
 	        for (int j=0; j<m_longueur; j++){
@@ -19,13 +23,14 @@ public class Plateau extends Objet{
 	}
 	
 	/**
-	 * Constructeur (creer le plateau de chaque niveau)
+	 * Constructeur (cree le plateau de chaque niveau)
 	 * @param x : entier contenant la coordonnee x du plateau
 	 * @param y : entier contenant la coordonnee y du plateau
 	 * @param largeur : entier contenant la largeur du plateau
 	 * @param longueur : entier contenant la longueur du plateau
 	 */
 	public Plateau(int x, int y, int largeur, int longueur) {
+		super(x,y); 
 		m_largeur = largeur;
 		m_longueur = longueur;
 		tab = new ObjetImmobile[m_longueur][m_largeur];
@@ -36,6 +41,32 @@ public class Plateau extends Objet{
 	    }
 	}
 	
+	/**
+	 * Constructeur supplementaire
+	 * @param x : entier contenant la coordonnee x du plateau
+	 * @param y : entier contenant la coordonnee y du plateau
+	 * @param fichier : ifstream du fichier contenant les elements du plateau du niveau en cours
+	 */
+	Plateau(int x, int y, File fichier){
+		super(x,y); 
+		try {
+			Scanner scanner = new Scanner(fichier);
+			m_largeur = scanner.nextInt();
+			m_longueur = scanner.nextInt();
+	
+		    tab = new ObjetImmobile[m_longueur][m_largeur];
+			for (int i=0; i<m_largeur; i++){
+				for (int j=0; j<m_longueur; j++){
+					char type = scanner.next().charAt(0);
+					tab[i][j] = new ObjetImmobile(i,j,type);
+			    }
+			}
+			scanner.close();
+		}
+		catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    }
+	}
 	//Methodes
 	/**
 	 * Donne acces aux elements du plateau (contenus dans un tableau d'ObjetImmobile)

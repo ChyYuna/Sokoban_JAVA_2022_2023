@@ -1,5 +1,8 @@
 package sokoban_code;
 
+import java.io.*;
+import java.util.Scanner;
+
 public class Partie {
 	//Attributs
 	private int m_niv=1, m_nbCaisses=1;
@@ -19,6 +22,56 @@ public class Partie {
 	}
 	
 	//Methodes
+	/**
+	 * Permet de lancer un niveau
+	 * @param niv : entier contenant le numero du niveau a lancer
+	 */
+	public void lancerNiveau(int niv) {
+		File fichier = new File(String.valueOf(niv)+".txt");
+	    
+	    int k=0; // L'entier k permet de numeroter les caisses et de les manipuler dans le tableau les contenant
+
+	    try {
+			Scanner scanner = new Scanner(fichier);
+	 
+	    	m_niv  = scanner.nextInt();
+	    	m_nbCaisses  = scanner.nextInt();
+	    	
+	    	m_plat = new Plateau(1,2, fichier);
+	    	
+	        m_c = new Caisse[m_nbCaisses]; // En lancant un nouveau niveau, la liste m_c (contentant les caisses) doit etre construite en fonction du nombre de caisse m_nbCaisses du niveau
+	        for (int i=0; i<m_nbCaisses; i++)
+	             m_c[i] = new Caisse();
+	        
+	        for (int i=0; i<m_plat.getLargeur(); i++){
+	            for (int j=0; j<m_plat.getLongueur(); j++){
+
+	                if (m_plat.getTab()[i][j].getType() == '@' || m_plat.getTab()[i][j].getType() == '+') {
+	                    m_perso.setX(j);
+	                    m_perso.setY(i);	
+	                    m_perso.setImg(":/images/Joueur/playerDown.png");
+	                }
+	                if (m_plat.getTab()[i][j].getType() == '$'){
+	                    m_c[k].setX(j);
+	                    m_c[k].setY(i);
+	                    m_c[k].setImg(":/images/Caisse/caisse.png");
+	                    k++;
+	                }
+	                if (m_plat.getTab()[i][j].getType() == '*'){
+	                    m_c[k].setX(j);
+	                    m_c[k].setY(i);
+	                    m_c[k].setImg(":/images/Caisse/caisseSurCible.png");
+	                    k++;
+	                }
+	            }
+	        }
+		    scanner.close();
+	    }
+	    catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
 	/**
 	 * Donne acces au plateau actuel de la partie
 	 * @return Objet de type Plateau
@@ -47,7 +100,79 @@ public class Partie {
 	 * Permet de modifier le numero du niveau actuel
 	 * @param n : entier contenant le nouveau niveau
 	 */
-	public void setNiv(int n){
-	    m_niv=n;
+	public void setNiv(int n){m_niv=n;}
+	
+	/**
+	 * Reinitialise le niveau actuel
+	 */
+	public void recommencerNiveau(){
+	    lancerNiveau(m_niv);
+	}
+	
+	/**
+	 * Donne acces au nombre de caisse du niveau actuel
+	 * @return entier contenant le nombre de caisse
+	 */
+	public int getNbCaisses(){return m_nbCaisses;}
+
+	/**
+	 * Permet de modifier le nombre de caisse
+	 * @param nbCaisses : entier contenant le nouveau nombre de caisses
+	 */
+	public void setNbCaisses(int nbCaisses){m_nbCaisses=nbCaisses;}
+	
+	/**
+	 * Permet de savoir si une case contient une caisse
+	 * @param x : entier contenant la coordonnee x de la case visee
+	 * @param y : entier contenant la coordonnee y de la case visee
+	 * @return entier contenant le numero de la caisse si la case visee la contient et -1 sinon
+	 */
+	public int estCaisse(int x, int y){
+	    for(int i=0; i<m_nbCaisses; i++){
+	        if(m_c[i].getX()==x && m_c[i].getY()==y)
+	            return i;
+	    }
+	    return -1;
+	}
+	
+	/**
+	 * Permet de savoir si une case est vide
+	 * @param x : entier contenant la coordonnee x de la case visee
+	 * @param y : entier contenant la coordonnee y de la case visee
+	 * @return True si la case visee est vide et False sinon
+	 */
+	public boolean estVide(int x, int y) {
+	    return (m_plat.getTab()[y][x].getType() != '#' && estCaisse(x,y)==-1);
+	}
+	
+	/**
+	 * Permet de savoir si une caisse donnee est sur une cible
+	 * @param c : objet de type caisse
+	 * @return True si la caisse est sur une cible et False sinon
+	 */
+	public boolean caisseSurCible(Caisse c){
+	    char type = m_plat.getTab()[c.getY()][c.getX()].getType();
+	    if(type=='.' || type=='+' || type=='*'){
+	    	c.setImg(":/images/Caisse/caisseSurCible.png");
+	        return true;
+	     }
+	     else {
+	    	c.setImg(":/images/Caisse/caisse.png");
+	        return false;
+	    }
+	}
+	
+	//Renvoie vrai si le niveau est termine et faux sinon
+	/**
+	 * Permet de savoir si un niveau est termine
+	 * @return True si le niveau est finit (chaque cible contient une caisse) et False sinon
+	 */
+	public boolean victoire(){
+	    int k=0;
+	    for(int i=0; i<m_nbCaisses; i++){
+	        if(caisseSurCible(m_c[i]))
+	            k++;
+	    }
+	    return(k==m_nbCaisses);
 	}
 }

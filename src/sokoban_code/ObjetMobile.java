@@ -1,6 +1,8 @@
 package sokoban_code;
 
 public abstract class ObjetMobile extends Objet{
+	//Attributs
+	private String img;
 	
 	//Constructeurs 
 	/**
@@ -27,4 +29,16 @@ public abstract class ObjetMobile extends Objet{
 		super.setX(super.getX() + dx);
 		super.setY(super.getY() + dy);
 	}
+	
+	/**
+	 * Donne acces a l'image de l'objet mobile dans l'etat
+	 * @return String contenant l'image de l'objet mobile
+	 */
+	public String getImg(){return img;}
+	
+	/**
+	 * Permet de modifier l'image de l'objet mobile
+	 * @param i : String contenant la nouvelle image de l'objet mobile
+	 */
+	public void setImg(String i){img = i;}
 }
