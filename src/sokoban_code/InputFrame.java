@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Image;
 
@@ -14,12 +16,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 import java.awt.Dimension;
+import javax.swing.ButtonGroup;
 
 public class InputFrame extends JFrame {
 
 	private JPanel contentPane;
-
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private int stateWindow = 0; //0-> menu 1-> Game
 	/**
 	 * Launch the application.
 	 */
@@ -49,13 +54,14 @@ public class InputFrame extends JFrame {
 		ImageIcon icon_tools = new ImageIcon("Tools_Button.png");
 		ImageIcon icon_retry = new ImageIcon("Tools_Button.png"); // à créer comme bouton
 		ImageIcon icon_menu = new ImageIcon("Tools_Button.png"); // à créer comme bouton
-		
+		ImageIcon background_game = new ImageIcon("background.png");
 		icon_play = ResizeButton(icon_play,153,62);
 		icon_help = ResizeButton(icon_help,153,62);
 		icon_tools = ResizeButton(icon_tools,153,62);
 		icon_retry = ResizeButton(icon_retry,153,62);
 		icon_menu = ResizeButton(icon_menu,153,62);
 		background_menu = ResizeGround(background_menu, 1074,446);
+		background_game = ResizeGround(background_game, 1074,446);
 
 		//resize image for button
 		
@@ -66,16 +72,16 @@ public class InputFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		
-		//play
 		JButton btnPlay = new JButton(icon_play);
+		buttonGroup.add(btnPlay);
 		btnPlay.setBounds(468, 300, 153, 62);
 		contentPane.add(btnPlay);
-		
 		
 		//Help
 		JButton btnHelp= new JButton(icon_help);
 		btnHelp.setBounds(889, 300, 153, 62);
+		btnHelp.setContentAreaFilled(false);
+		btnHelp.setBorderPainted(false);
 		contentPane.add(btnHelp);
 
 		//Tools
@@ -99,9 +105,46 @@ public class InputFrame extends JFrame {
 		//back.setLayout(null);
 		back.setBounds(0,0,1074,446); 
 		contentPane.add(back);
-		
+		//event button gestionnary
+		class Listener extends JPanel implements ActionListener {
+			public void actionPerformed(ActionEvent event) {
+				Color color;
+				ImageIcon background_game = new ImageIcon("background.png");
+				background_game = ResizeGround(background_game, 1074,446);
+				JLabel back_game=new JLabel(background_game);
+				//back.setLayout(null);
+				back_game.setBounds(0,0,1074,446); 
+				if (event.getSource() == btnHelp) {
+					JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
+	                JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
 
+				} else if (event.getSource() == btnPlay) {
+
+					JFrame newframe = new JFrame("JOptionPane Play UwU example");
+	                JOptionPane.showMessageDialog(newframe,"UwU");
+	                contentPane.remove(back);
+	                contentPane.add(back_game);
+	                btnPlay.setVisible(false);
+	                
+				} else if (event.getSource()== btnHome){
+					contentPane.remove(back_game);
+					contentPane.add(back);
+					btnPlay.setVisible(true);
+				}
+		       contentPane.repaint();
+			}
 		}
+		
+		
+		//action with buttons 
+		btnHelp.addActionListener(new Listener());
+		btnPlay.addActionListener(new Listener());
+		btnHome.addActionListener(new Listener());
+	}
+
+	
+		
+	
 	public ImageIcon ResizeButton(ImageIcon icon, int w, int h) {
 		Image image = icon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(w, h,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
