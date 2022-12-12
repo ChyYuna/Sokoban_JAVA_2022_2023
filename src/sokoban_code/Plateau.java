@@ -47,7 +47,7 @@ public class Plateau extends Objet{
 	 * @param y : entier contenant la coordonnee y du plateau
 	 * @param fichier : ifstream du fichier contenant les elements du plateau du niveau en cours
 	 */
-	Plateau(int x, int y, File fichier){
+	public Plateau(int x, int y, File fichier){
 		super(x,y); 
 		try {
 			Scanner scanner = new Scanner(fichier);
