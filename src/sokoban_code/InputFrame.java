@@ -7,8 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
+import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
 
 import javax.swing.Icon;
@@ -20,8 +21,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.ButtonGroup;
 
-public class InputFrame extends JFrame {
 
+
+// Comment: Try to resolve issue with background switching
+public class InputFrame extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final Partie m_partie = new Partie();
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private int stateWindow = 0; //0-> menu 1-> Game
@@ -107,8 +115,12 @@ public class InputFrame extends JFrame {
 		contentPane.add(back);
 		//event button gestionnary
 		class Listener extends JPanel implements ActionListener {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public void actionPerformed(ActionEvent event) {
-				Color color;
 				ImageIcon background_game = new ImageIcon("background.png");
 				background_game = ResizeGround(background_game, 1074,446);
 				JLabel back_game=new JLabel(background_game);
@@ -119,12 +131,22 @@ public class InputFrame extends JFrame {
 	                JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
 
 				} else if (event.getSource() == btnPlay) {
-
+					
 					JFrame newframe = new JFrame("JOptionPane Play UwU example");
 	                JOptionPane.showMessageDialog(newframe,"UwU");
 	                contentPane.remove(back);
 	                contentPane.add(back_game);
 	                btnPlay.setVisible(false);
+	                m_partie.lancerNiveau(1);       
+	                int largeur = m_partie.getPlateau().getLargeur();
+	                int longueur = m_partie.getPlateau().getLongueur();
+	                for (int i=0; i<longueur; i++) {
+	                	for(int j=0; i<largeur;j++) {
+	                		char type = m_partie.getPlateauElt(i,j); //out of bond index 7 
+	                		System.out.print(type);	                		
+	                	}
+	                }
+	         
 	                
 				} else if (event.getSource()== btnHome){
 					contentPane.remove(back_game);
@@ -134,7 +156,14 @@ public class InputFrame extends JFrame {
 		       contentPane.repaint();
 			}
 		}
+	
 		
+		//set Cursor
+		btnPlay.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnHelp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnConfigure.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRetry.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		//action with buttons 
 		btnHelp.addActionListener(new Listener());
@@ -142,8 +171,6 @@ public class InputFrame extends JFrame {
 		btnHome.addActionListener(new Listener());
 	}
 
-	
-		
 	
 	public ImageIcon ResizeButton(ImageIcon icon, int w, int h) {
 		Image image = icon.getImage(); // transform it 
@@ -157,6 +184,7 @@ public class InputFrame extends JFrame {
 		Image newimg = image.getScaledInstance(w, h,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		return new ImageIcon(newimg);  // transform it back
 	}
+	
 }
 //
 //Image image = icon_play.getImage(); // transform it 

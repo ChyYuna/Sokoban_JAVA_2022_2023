@@ -27,7 +27,7 @@ public class Partie {
 	 * @param niv : entier contenant le numero du niveau a lancer
 	 */
 	public void lancerNiveau(int niv) {
-		File fichier = new File(String.valueOf(niv)+".txt");
+		File fichier = new File(String.valueOf(2)+".txt");// niv àà la place du 2
 	    
 	    int k=0; // L'entier k permet de numeroter les caisses et de les manipuler dans le tableau les contenant
 
@@ -37,15 +37,15 @@ public class Partie {
 	    	m_niv  = scanner.nextInt();
 	    	m_nbCaisses  = scanner.nextInt();
 	    	
-	    	m_plat = new Plateau(1,2, fichier);
+	    	m_plat = new Plateau(1,2, scanner); // ne fonctionne pas. Essayer avec scanner à la place? 
 	    	
 	        m_c = new Caisse[m_nbCaisses]; // En lancant un nouveau niveau, la liste m_c (contentant les caisses) doit etre construite en fonction du nombre de caisse m_nbCaisses du niveau
 	        for (int i=0; i<m_nbCaisses; i++)
-	             m_c[i] = new Caisse();
-	        
+	             m_c[i] = new Caisse(); // Ne fonctionne pas: Aucune caisse est repérée
 	        for (int i=0; i<m_plat.getLargeur(); i++){
+	        	System.out.println("");
 	            for (int j=0; j<m_plat.getLongueur(); j++){
-
+	            	System.out.print(m_plat.getElt(i, j));
 	                if (m_plat.getTab()[i][j].getType() == '@' || m_plat.getTab()[i][j].getType() == '+') {
 	                    m_perso.setX(j);
 	                    m_perso.setY(i);	
@@ -78,6 +78,8 @@ public class Partie {
 	 */
 	public Plateau getPlateau() {return m_plat;}
 	
+	
+	public char getPlateauElt(int i, int j) {return m_plat.getElt(i,j);}
 	/**
 	 * Donne acces aux caisses de la partie
 	 * @return Vecteur contenant les caisses

@@ -1,6 +1,7 @@
 package sokoban_code;
 
 import java.io.*;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Plateau extends Objet{
@@ -47,25 +48,32 @@ public class Plateau extends Objet{
 	 * @param y : entier contenant la coordonnee y du plateau
 	 * @param fichier : ifstream du fichier contenant les elements du plateau du niveau en cours
 	 */
-	public Plateau(int x, int y, File fichier){
-		super(x,y); 
-		try {
-			Scanner scanner = new Scanner(fichier);
-			m_largeur = scanner.nextInt();
-			m_longueur = scanner.nextInt();
-	
-		    tab = new ObjetImmobile[m_longueur][m_largeur];
-			for (int i=0; i<m_largeur; i++){
-				for (int j=0; j<m_longueur; j++){
-					char type = scanner.next().charAt(0);
-					tab[i][j] = new ObjetImmobile(i,j,type);
-			    }
+	public Plateau(int x, int y, Scanner scanner){
+	super(x,y); 
+		//Scanner scanner = new Scanner(fichier);
+		
+		m_largeur = scanner.nextInt();
+		m_longueur = scanner.nextInt();
+	    tab = new ObjetImmobile[m_longueur][m_largeur];
+		for (int i=0; i<m_largeur; i++){
+			String line_type = scanner.next();
+			for (int j=0; j<m_longueur; j++){
+				tab[i][j] = new ObjetImmobile(i,j,line_type.charAt(j));
 			}
-			scanner.close();
+			//System.out.println(line_type);
 		}
-		catch (FileNotFoundException e) {
-	        e.printStackTrace();
-	    }
+		//test
+		for (int i=0; i<m_largeur; i++){
+			System.out.println("");
+			for (int j=0; j<m_longueur; j++){
+				System.out.print(tab[i][j].getType());
+			}
+			//System.out.println(line_type);
+		}
+		//
+		//catch (FileNotFoundException e) {
+	    //    e.printStackTrace();
+	    //}
 	}
 	//Methodes
 	/**
@@ -74,6 +82,7 @@ public class Plateau extends Objet{
 	 */
 	public ObjetImmobile[][] getTab(){return tab;}
 	
+	public char getElt(int i, int j) {return tab[i][j].getType();} 
 	/**
 	 * Donne acces a la largeur du plateau actuel
 	 * @return entier contenant la largeur du plateau
