@@ -1,0 +1,48 @@
+\hypertarget{partie_8h_source}{}\doxysection{partie.\+h}
+\mbox{\hyperlink{partie_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00001}00001 \textcolor{preprocessor}{\#ifndef PARTIE\_H}}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00002}00002 \textcolor{preprocessor}{\#define PARTIE\_H}}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00004}00004 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{plateau_8h}{plateau.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00005}00005 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{personnage_8h}{personnage.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00006}00006 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{caisse_8h}{caisse.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00007}00007 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{configuration_8h}{configuration.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00008}00008 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00009}00009 \textcolor{preprocessor}{\#include <cstring>}}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00010}00010 }
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00011}00011 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00012}00012 }
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00021}\mbox{\hyperlink{class_partie}{00021}} \textcolor{keyword}{class }\mbox{\hyperlink{class_partie}{Partie}}}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00022}00022 \{}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00023}00023 \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00024}00024     \textcolor{keywordtype}{int} m\_niv;}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00025}00025     \textcolor{keywordtype}{int} m\_nbCaisses;}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00026}00026     \mbox{\hyperlink{class_personnage}{Personnage}}* m\_perso;}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00027}00027     \mbox{\hyperlink{class_caisse}{Caisse}}* m\_c;}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00028}00028     \mbox{\hyperlink{class_plateau}{Plateau}}* m\_plat;}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00029}00029     \mbox{\hyperlink{class_configuration}{Configuration}}* config;}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00030}00030 }
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00031}00031 \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00032}00032     \mbox{\hyperlink{class_partie_ae40831aad10fc4a391295e2ea1447b5a}{Partie}}();}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00033}00033     \mbox{\hyperlink{class_partie_ae40831aad10fc4a391295e2ea1447b5a}{Partie}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_partie}{Partie}} \&part);}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00034}00034     \mbox{\hyperlink{class_partie_ae4afeb7336bb84427272cfb7018b5e3d}{\string~Partie}}();}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00035}00035     \mbox{\hyperlink{class_plateau}{Plateau}}* \mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00036}00036     \mbox{\hyperlink{class_configuration}{Configuration}}* \mbox{\hyperlink{class_partie_aa8f54b789266289006ee98a7db70269d}{getConfig}}();}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00037}00037     \mbox{\hyperlink{class_caisse}{Caisse}}* \mbox{\hyperlink{class_partie_abf297028688f7ef9be5ae8a6c9b2324f}{getCaisses}}();}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00038}00038     \mbox{\hyperlink{class_personnage}{Personnage}}* \mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}();}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00039}00039     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_partie_a7b99af6588545b77fc14df88e5f55cbc}{lancerNiveau}}(\textcolor{keywordtype}{int} niv);}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00040}00040     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_partie_a6289fef51d823029f1ba824ec90619ab}{estVide}}(\textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y) ;}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00041}00041     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_partie_a345bac30b0b398333c2bde2ad218f1f6}{recommencerNiveau}}();}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00042}00042     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_partie_ae5ad458eba59235d21bfdbae404bc532}{victoire}}();}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00043}00043     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_partie_a213a0de842d8dbbdddb3c82097e62e47}{getNiv}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00044}00044     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_partie_a6f01d665b2b5d098295dc4545ba608ce}{setNiv}}(\textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00045}00045     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_partie_a16d9f6f30f36b61c3a8e4492d1d7e44c}{getNbCaisses}}()\textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00046}00046     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_partie_ae1290881ff4b79be8e84e4c2b2638994}{setNbCaisses}}(\textcolor{keywordtype}{int} nbCaisses);}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00047}00047     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_partie_afedb6e6e38549f1346886486d1ccccb1}{estCaisse}}(\textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y);}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00048}00048     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_partie_a71fea36b5a3ac55bf4c729cba546d6b6}{caisseSurCible}}(\mbox{\hyperlink{class_caisse}{Caisse}} \&c);}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00049}00049 \};}
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00050}00050 }
+\DoxyCodeLine{\Hypertarget{partie_8h_source_l00051}00051 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// PARTIE\_H}}
+
+\end{DoxyCode}

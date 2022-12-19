@@ -1,0 +1,94 @@
+\hypertarget{optionswindow_8cpp_source}{}\doxysection{optionswindow.\+cpp}
+\mbox{\hyperlink{optionswindow_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00001}00001 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{optionswindow_8h}{optionswindow.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00002}00002 \textcolor{preprocessor}{\#include "{}ui\_optionswindow.h"{}}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00013}\mbox{\hyperlink{class_options_window_a449c0121a7519c281796d5bea8c965c3}{00013}} \mbox{\hyperlink{class_options_window_a449c0121a7519c281796d5bea8c965c3}{OptionsWindow::OptionsWindow}}(QWidget *parent) :}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00014}00014     QDialog(parent),}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00015}00015     ui(new Ui::\mbox{\hyperlink{class_options_window}{OptionsWindow}})}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00016}00016 \{}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00017}00017     ui-\/>setupUi(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00018}00018     setWindowTitle(\textcolor{stringliteral}{"{}Options"{}});}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00019}00019     this-\/>setFixedSize(this-\/>size()); \textcolor{comment}{//fixe la taille de la fenetre definitivement}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00020}00020 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00021}00021     config = \textcolor{keyword}{new} \mbox{\hyperlink{class_configuration}{Configuration}};}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00022}00022     codeFaux = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00024}00024     \textcolor{comment}{//Configuration du bouton Retour}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00025}00025     ui-\/>bRetour-\/>setStyleSheet(\textcolor{stringliteral}{"{}QPushButton\{font-\/size: 14px;font-\/family: Arial\}"{}});}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00026}00026     ui-\/>bRetour-\/>setIcon(QIcon (\textcolor{stringliteral}{"{}:/images/Icones/retour.png"{}}));}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00027}00027     ui-\/>bRetour-\/>setIconSize(QSize (15,15));}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00029}00029     ui-\/>bRetour-\/>setAutoDefault(\textcolor{keyword}{false}); \textcolor{comment}{//donne le focus en priorite au bouton Valider (en tapant entree)}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00030}00030     this-\/>setFocus(Qt::MouseFocusReason);}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00031}00031 \}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00037}00037 \textcolor{keywordtype}{void} OptionsWindow::paintEvent(QPaintEvent* e) \{}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00038}00038      QWidget::paintEvent(e);}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00039}00039      QPainter painter(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00040}00040 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00041}00041      painter.setPen(QPen(Qt::darkBlue,1));}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00042}00042      painter.setFont(QFont(\textcolor{stringliteral}{"{}Mingzat"{}},15));}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00043}00043      painter.drawText(0,30,QString(\textcolor{stringliteral}{"{}Saisir le code d'un niveau : "{}}));}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00044}00044 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00045}00045      \textcolor{keywordflow}{if} (codeFaux)  \textcolor{comment}{//Si le code d'acces saisi ne correspond a aucun niveau, on affiche un message}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00046}00046      \{}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00047}00047          painter.setPen(QPen(Qt::red,1));}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00048}00048          painter.setFont(QFont(\textcolor{stringliteral}{"{}Monospace"{}},12));}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00049}00049          painter.drawText(140,110,QString(\textcolor{stringliteral}{"{}Code incorrect"{}}));}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00050}00050      \}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00051}00051 \}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00052}00052 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00056}\mbox{\hyperlink{class_options_window_a034c885fe8bb4416e732a9571d14a6b4}{00056}} \mbox{\hyperlink{class_options_window_a034c885fe8bb4416e732a9571d14a6b4}{OptionsWindow::\string~OptionsWindow}}()}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00057}00057 \{}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00058}00058     \textcolor{keyword}{delete} ui;}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00059}00059     \textcolor{keyword}{delete} config;}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00060}00060 \}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00061}00061 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00065}00065 \textcolor{keywordtype}{void} OptionsWindow::on\_bRetour\_clicked()}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00066}00066 \{}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00067}00067     this-\/>close();}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00068}00068 \}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00069}00069 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00074}\mbox{\hyperlink{class_options_window_a7d59211fced07a03b33009d5b7b645f8}{00074}} \mbox{\hyperlink{class_configuration}{Configuration}}* \mbox{\hyperlink{class_options_window_a7d59211fced07a03b33009d5b7b645f8}{OptionsWindow::getConfig}}()\{}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00075}00075     \textcolor{keywordflow}{return} config;}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00076}00076 \}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00077}00077 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00083}\mbox{\hyperlink{class_options_window_ace475ae79484479d3e9336214478fbe8}{00083}} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_options_window_ace475ae79484479d3e9336214478fbe8}{OptionsWindow::trouve}}(QString code)\{}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00084}00084 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00085}00085     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<config-\/>\mbox{\hyperlink{class_configuration_a2f5bbb664c430f89fe6f9b8db5c1a52f}{getNbNiv}}(); i++)\{}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00086}00086         \textcolor{keywordflow}{if} (config-\/>\mbox{\hyperlink{class_configuration_ae2b57efa265533af9dcb3df22c16c3f7}{getListeCodes}}()[i] == code)}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00087}00087             \textcolor{keywordflow}{return} i+1;  \textcolor{comment}{//On retourne i+1 car la liste commence a l'indice 0}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00088}00088     \}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00089}00089     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00090}00090 \}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00091}00091 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00095}00095 \textcolor{keywordtype}{void} OptionsWindow::on\_bValider\_clicked()}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00096}00096 \{}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00097}00097    \textcolor{keywordtype}{int} niv = \mbox{\hyperlink{class_options_window_ace475ae79484479d3e9336214478fbe8}{trouve}}(ui-\/>codeEdit-\/>text());}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00098}00098    \textcolor{keywordflow}{if} (niv != -\/1)\{}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00099}00099        codeFaux = \textcolor{keyword}{false}; \textcolor{comment}{//Le code est correct}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00100}00100 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00101}00101        \textcolor{comment}{//MessageBox precisant le lancement du niveau a venir}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00102}00102        msgBox.setWindowTitle(\textcolor{stringliteral}{"{}Code correct"{}});}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00103}00103        msgBox.setText(\textcolor{stringliteral}{"{}Lancer le niveau "{}} + QString::number(niv) + \textcolor{stringliteral}{"{} ?"{}});}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00104}00104        msgBox.setIcon(QMessageBox::Question);}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00105}00105        msgBox.setStandardButtons(QMessageBox::Yes);}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00106}00106        msgBox.setDefaultButton(QMessageBox::Yes);}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00107}00107        msgBox.addButton(QMessageBox::No);}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00108}00108        msgBox.setButtonText(QMessageBox::Yes,\textcolor{stringliteral}{"{}Oui"{}});}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00109}00109        msgBox.setButtonText(QMessageBox::No,\textcolor{stringliteral}{"{}Non"{}});}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00110}00110 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00111}00111        \textcolor{keywordflow}{if} (msgBox.exec() == QMessageBox::Yes)\{}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00112}00112            config-\/>\mbox{\hyperlink{class_configuration_aeb8dbf08db4646f9c4cd4ba608e08e58}{setNivALancer}}(niv);}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00113}00113            this-\/>close();}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00114}00114        \}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00115}00115    \}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00116}00116    \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00117}00117         codeFaux = \textcolor{keyword}{true}; \textcolor{comment}{//Le code est incorrect}}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00118}00118 }
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00119}00119    this-\/>repaint();}
+\DoxyCodeLine{\Hypertarget{optionswindow_8cpp_source_l00120}00120 \}}
+
+\end{DoxyCode}

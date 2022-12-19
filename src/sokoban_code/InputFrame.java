@@ -142,7 +142,7 @@ public class InputFrame extends JFrame {
 	                int longueur = m_partie.getPlateau().getLongueur();
 	                for (int i=0; i<longueur; i++) {
 	                	for(int j=0; i<largeur;j++) {
-	                		char type = m_partie.getPlateauElt(i,j); //out of bond index 7 
+	                		char type = m_partie.getPlateauElt(i,j); //out of bond index 7 (pb)
 	                		System.out.print(type);	                		
 	                	}
 	                }

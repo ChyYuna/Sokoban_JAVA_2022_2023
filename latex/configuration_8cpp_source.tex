@@ -1,0 +1,56 @@
+\hypertarget{configuration_8cpp_source}{}\doxysection{configuration.\+cpp}
+\mbox{\hyperlink{configuration_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00001}00001 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{configuration_8h}{configuration.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00011}\mbox{\hyperlink{class_configuration_a779947337bf652f0e773cb29f37f14ba}{00011}} \mbox{\hyperlink{class_configuration_a779947337bf652f0e773cb29f37f14ba}{Configuration::Configuration}}()}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00012}00012 \{}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00013}00013     m\_niveauALancer = -\/1; \textcolor{comment}{//Par default, le niveau a lancer est -\/1, c'est a dire que rien ne se lance}}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00014}00014     ifstream fichier(\textcolor{stringliteral}{"{}codes.txt"{}}, ios::in);}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00016}00016     \textcolor{keywordflow}{if}(!fichier.fail())\{}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00017}00017         \textcolor{keywordtype}{string} code;}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00018}00018         fichier >> m\_nbNiveau;}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00019}00019         m\_listeCodes = \textcolor{keyword}{new} QString[m\_nbNiveau];}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00020}00020 }
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00021}00021         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<m\_nbNiveau; i++) \textcolor{comment}{//On remplie notre liste avec les codes contenus dans le fichier}}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00022}00022         \{}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00023}00023              fichier >> code;}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00024}00024              m\_listeCodes[i] = QString::fromStdString(code);}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00025}00025         \}}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00026}00026         fichier.close();}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00027}00027      \}}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00028}00028      \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00029}00029         cerr << \textcolor{stringliteral}{"{}Impossible d'ouvrir le fichier !"{}} << endl;}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00030}00030 \}}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00031}00031 }
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00037}\mbox{\hyperlink{class_configuration_a74cdde9cb4da23a8091dc09accd7289e}{00037}} \mbox{\hyperlink{class_configuration_a779947337bf652f0e773cb29f37f14ba}{Configuration::Configuration}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_configuration}{Configuration}} \&c)\{}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00038}00038     m\_niveauALancer = c.m\_niveauALancer;}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00039}00039     m\_nbNiveau = c.m\_nbNiveau;}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00040}00040 }
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00041}00041     m\_listeCodes = \textcolor{keyword}{new} QString[c.m\_nbNiveau];}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00042}00042     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<c.m\_nbNiveau; i++)}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00043}00043          m\_listeCodes[i] = c.m\_listeCodes[i];}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00044}00044 \}}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00045}00045 }
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00049}\mbox{\hyperlink{class_configuration_a0dd0fa189e239f4c9a036303f641441e}{00049}} \mbox{\hyperlink{class_configuration_a0dd0fa189e239f4c9a036303f641441e}{Configuration::\string~Configuration}}()\{}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00050}00050     \textcolor{keyword}{delete}[] m\_listeCodes;}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00051}00051 \}}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00052}00052 }
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00057}\mbox{\hyperlink{class_configuration_ae2b57efa265533af9dcb3df22c16c3f7}{00057}} QString* \mbox{\hyperlink{class_configuration_ae2b57efa265533af9dcb3df22c16c3f7}{Configuration::getListeCodes}}()\{}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00058}00058     \textcolor{keywordflow}{return} m\_listeCodes;}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00059}00059 \}}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00060}00060 }
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00065}\mbox{\hyperlink{class_configuration_a2f5bbb664c430f89fe6f9b8db5c1a52f}{00065}} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_configuration_a2f5bbb664c430f89fe6f9b8db5c1a52f}{Configuration::getNbNiv}}()\{}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00066}00066     \textcolor{keywordflow}{return} m\_nbNiveau;}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00067}00067 \}}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00068}00068 }
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00073}\mbox{\hyperlink{class_configuration_affbd5d94c851c05c2bd5298e80046b39}{00073}} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_configuration_affbd5d94c851c05c2bd5298e80046b39}{Configuration::getNivAlancer}}()\{}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00074}00074     \textcolor{keywordflow}{return} m\_niveauALancer;}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00075}00075 \}}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00076}00076 }
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00081}\mbox{\hyperlink{class_configuration_aeb8dbf08db4646f9c4cd4ba608e08e58}{00081}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_configuration_aeb8dbf08db4646f9c4cd4ba608e08e58}{Configuration::setNivALancer}}(\textcolor{keywordtype}{int} niv)\{}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00082}00082     m\_niveauALancer = niv;}
+\DoxyCodeLine{\Hypertarget{configuration_8cpp_source_l00083}00083 \}}
+
+\end{DoxyCode}

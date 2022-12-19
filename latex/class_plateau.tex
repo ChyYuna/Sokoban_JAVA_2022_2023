@@ -1,0 +1,252 @@
+\hypertarget{class_plateau}{}\doxysection{Plateau Class Reference}
+\label{class_plateau}\index{Plateau@{Plateau}}
+
+
+Classe {\ttfamily \mbox{\hyperlink{class_plateau}{Plateau}}} \+: permet de manipuler un plateau.  
+
+
+
+
+{\ttfamily \#include $<$plateau.\+h$>$}
+
+Inheritance diagram for Plateau\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_plateau}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_plateau_ab4723e56bee8b01588c57a93d7164604}{Plateau}} (int x=0, int y=0, int la=5, int lo=5)
+\begin{DoxyCompactList}\small\item\em Constructeur (creer le plateau de chaque niveau) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_plateau_a0dd008fd50feb78c0f84c974d0960878}{Plateau}} (int x, int y, const \mbox{\hyperlink{class_plateau}{Plateau}} \&p)
+\begin{DoxyCompactList}\small\item\em Constructeur de recopie. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_plateau_a23a334016ffa21ba8a2ad4dc4add3dfe}{Plateau}} (int x, int y, ifstream \&fichier)
+\begin{DoxyCompactList}\small\item\em Constructeur supplementaire. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_plateau_a0e6ae72e4d7e9923f996c1247e6a6c8b}{$\sim$\+Plateau}} ()
+\begin{DoxyCompactList}\small\item\em Destructeur. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_objet_immobile}{Objet\+Immobile}} $\ast$$\ast$ \mbox{\hyperlink{class_plateau_a3cbf383e2c0d89ffb62541e63ff4b8fd}{get\+Tab}} () const
+\begin{DoxyCompactList}\small\item\em Donne acces aux elements du plateau (contenus dans un tableau d\textquotesingle{}\mbox{\hyperlink{class_objet_immobile}{Objet\+Immobile}}) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_plateau_a6b595fd1ae0f623aed1e82daaaa43915}{get\+Largeur}} ()
+\begin{DoxyCompactList}\small\item\em Donne acces a la largeur du plateau actuel. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_plateau_a5bb31cf61b30029ee4529371bcd9c88d}{get\+Longueur}} ()
+\begin{DoxyCompactList}\small\item\em Donne acces a la longueur du plateau actuel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_plateau_a77de3bbc917fe10cf339504c4343cc6f}{set\+Largeur}} (int largeur)
+\begin{DoxyCompactList}\small\item\em Permet de modifier la largeur du plateau. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_plateau_a7ecd4c2d0651aebe29cdd68071bc9477}{set\+Longueur}} (int longueur)
+\begin{DoxyCompactList}\small\item\em Permet de modifier la longueur du plateau. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_plateau_ada523f34824fa7f90d49084b5f5fead4}{set\+Tab}} (\mbox{\hyperlink{class_objet_immobile}{Objet\+Immobile}} $\ast$$\ast$T)
+\begin{DoxyCompactList}\small\item\em Permet de modifier le tableau contenant les elements du plateau. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe {\ttfamily \mbox{\hyperlink{class_plateau}{Plateau}}} \+: permet de manipuler un plateau. 
+
+Definition at line \mbox{\hyperlink{plateau_8h_source_l00020}{20}} of file \mbox{\hyperlink{plateau_8h_source}{plateau.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_plateau_ab4723e56bee8b01588c57a93d7164604}\label{class_plateau_ab4723e56bee8b01588c57a93d7164604}} 
+\index{Plateau@{Plateau}!Plateau@{Plateau}}
+\index{Plateau@{Plateau}!Plateau@{Plateau}}
+\doxysubsubsection{\texorpdfstring{Plateau()}{Plateau()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Plateau\+::\+Plateau (\begin{DoxyParamCaption}\item[{int}]{x = {\ttfamily 0},  }\item[{int}]{y = {\ttfamily 0},  }\item[{int}]{la = {\ttfamily 5},  }\item[{int}]{lo = {\ttfamily 5} }\end{DoxyParamCaption})}
+
+
+
+Constructeur (creer le plateau de chaque niveau) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \+: entier contenant la coordonnee x du plateau \\
+\hline
+{\em y} & \+: entier contenant la coordonnee y du plateau \\
+\hline
+{\em la} & \+: entier contenant la largeur du plateau \\
+\hline
+{\em lo} & \+: entier contenant la longueur du plateau \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{plateau_8cpp_source_l00015}{15}} of file \mbox{\hyperlink{plateau_8cpp_source}{plateau.\+cpp}}.
+
+\mbox{\Hypertarget{class_plateau_a0dd008fd50feb78c0f84c974d0960878}\label{class_plateau_a0dd008fd50feb78c0f84c974d0960878}} 
+\index{Plateau@{Plateau}!Plateau@{Plateau}}
+\index{Plateau@{Plateau}!Plateau@{Plateau}}
+\doxysubsubsection{\texorpdfstring{Plateau()}{Plateau()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Plateau\+::\+Plateau (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{const \mbox{\hyperlink{class_plateau}{Plateau}} \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Constructeur de recopie. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \+: entier contenant la coordonnee x du plateau \\
+\hline
+{\em y} & \+: entier contenant la coordonnee y du plateau \\
+\hline
+{\em p} & \+: objet de type \mbox{\hyperlink{class_plateau}{Plateau}} a recopier \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{plateau_8cpp_source_l00034}{34}} of file \mbox{\hyperlink{plateau_8cpp_source}{plateau.\+cpp}}.
+
+\mbox{\Hypertarget{class_plateau_a23a334016ffa21ba8a2ad4dc4add3dfe}\label{class_plateau_a23a334016ffa21ba8a2ad4dc4add3dfe}} 
+\index{Plateau@{Plateau}!Plateau@{Plateau}}
+\index{Plateau@{Plateau}!Plateau@{Plateau}}
+\doxysubsubsection{\texorpdfstring{Plateau()}{Plateau()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Plateau\+::\+Plateau (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{ifstream \&}]{fichier }\end{DoxyParamCaption})}
+
+
+
+Constructeur supplementaire. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \+: entier contenant la coordonnee x du plateau \\
+\hline
+{\em y} & \+: entier contenant la coordonnee y du plateau \\
+\hline
+{\em fichier} & \+: ifstream du fichier contenant les elements du plateau du niveau en cours \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{plateau_8cpp_source_l00053}{53}} of file \mbox{\hyperlink{plateau_8cpp_source}{plateau.\+cpp}}.
+
+\mbox{\Hypertarget{class_plateau_a0e6ae72e4d7e9923f996c1247e6a6c8b}\label{class_plateau_a0e6ae72e4d7e9923f996c1247e6a6c8b}} 
+\index{Plateau@{Plateau}!````~Plateau@{$\sim$Plateau}}
+\index{````~Plateau@{$\sim$Plateau}!Plateau@{Plateau}}
+\doxysubsubsection{\texorpdfstring{$\sim$Plateau()}{~Plateau()}}
+{\footnotesize\ttfamily Plateau\+::$\sim$\+Plateau (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructeur. 
+
+
+
+Definition at line \mbox{\hyperlink{plateau_8cpp_source_l00071}{71}} of file \mbox{\hyperlink{plateau_8cpp_source}{plateau.\+cpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_plateau_a6b595fd1ae0f623aed1e82daaaa43915}\label{class_plateau_a6b595fd1ae0f623aed1e82daaaa43915}} 
+\index{Plateau@{Plateau}!getLargeur@{getLargeur}}
+\index{getLargeur@{getLargeur}!Plateau@{Plateau}}
+\doxysubsubsection{\texorpdfstring{getLargeur()}{getLargeur()}}
+{\footnotesize\ttfamily int Plateau\+::get\+Largeur (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Donne acces a la largeur du plateau actuel. 
+
+\begin{DoxyReturn}{Returns}
+entier contenant la largeur du plateau 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{plateau_8cpp_source_l00088}{88}} of file \mbox{\hyperlink{plateau_8cpp_source}{plateau.\+cpp}}.
+
+\mbox{\Hypertarget{class_plateau_a5bb31cf61b30029ee4529371bcd9c88d}\label{class_plateau_a5bb31cf61b30029ee4529371bcd9c88d}} 
+\index{Plateau@{Plateau}!getLongueur@{getLongueur}}
+\index{getLongueur@{getLongueur}!Plateau@{Plateau}}
+\doxysubsubsection{\texorpdfstring{getLongueur()}{getLongueur()}}
+{\footnotesize\ttfamily int Plateau\+::get\+Longueur (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Donne acces a la longueur du plateau actuel. 
+
+\begin{DoxyReturn}{Returns}
+entier contenant la longueur du plateau 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{plateau_8cpp_source_l00096}{96}} of file \mbox{\hyperlink{plateau_8cpp_source}{plateau.\+cpp}}.
+
+\mbox{\Hypertarget{class_plateau_a3cbf383e2c0d89ffb62541e63ff4b8fd}\label{class_plateau_a3cbf383e2c0d89ffb62541e63ff4b8fd}} 
+\index{Plateau@{Plateau}!getTab@{getTab}}
+\index{getTab@{getTab}!Plateau@{Plateau}}
+\doxysubsubsection{\texorpdfstring{getTab()}{getTab()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_objet_immobile}{Objet\+Immobile}} $\ast$$\ast$ Plateau\+::get\+Tab (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Donne acces aux elements du plateau (contenus dans un tableau d\textquotesingle{}\mbox{\hyperlink{class_objet_immobile}{Objet\+Immobile}}) 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_objet}{Objet}} de type Objet\+Immobile$\ast$$\ast$ 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{plateau_8cpp_source_l00080}{80}} of file \mbox{\hyperlink{plateau_8cpp_source}{plateau.\+cpp}}.
+
+\mbox{\Hypertarget{class_plateau_a77de3bbc917fe10cf339504c4343cc6f}\label{class_plateau_a77de3bbc917fe10cf339504c4343cc6f}} 
+\index{Plateau@{Plateau}!setLargeur@{setLargeur}}
+\index{setLargeur@{setLargeur}!Plateau@{Plateau}}
+\doxysubsubsection{\texorpdfstring{setLargeur()}{setLargeur()}}
+{\footnotesize\ttfamily void Plateau\+::set\+Largeur (\begin{DoxyParamCaption}\item[{int}]{largeur }\end{DoxyParamCaption})}
+
+
+
+Permet de modifier la largeur du plateau. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em largeur} & \+: entier contenant la nouvelle largeur \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{plateau_8cpp_source_l00112}{112}} of file \mbox{\hyperlink{plateau_8cpp_source}{plateau.\+cpp}}.
+
+\mbox{\Hypertarget{class_plateau_a7ecd4c2d0651aebe29cdd68071bc9477}\label{class_plateau_a7ecd4c2d0651aebe29cdd68071bc9477}} 
+\index{Plateau@{Plateau}!setLongueur@{setLongueur}}
+\index{setLongueur@{setLongueur}!Plateau@{Plateau}}
+\doxysubsubsection{\texorpdfstring{setLongueur()}{setLongueur()}}
+{\footnotesize\ttfamily void Plateau\+::set\+Longueur (\begin{DoxyParamCaption}\item[{int}]{longueur }\end{DoxyParamCaption})}
+
+
+
+Permet de modifier la longueur du plateau. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em largeur} & \+: entier contenant la nouvelle longueur \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{plateau_8cpp_source_l00120}{120}} of file \mbox{\hyperlink{plateau_8cpp_source}{plateau.\+cpp}}.
+
+\mbox{\Hypertarget{class_plateau_ada523f34824fa7f90d49084b5f5fead4}\label{class_plateau_ada523f34824fa7f90d49084b5f5fead4}} 
+\index{Plateau@{Plateau}!setTab@{setTab}}
+\index{setTab@{setTab}!Plateau@{Plateau}}
+\doxysubsubsection{\texorpdfstring{setTab()}{setTab()}}
+{\footnotesize\ttfamily void Plateau\+::set\+Tab (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_objet_immobile}{Objet\+Immobile}} $\ast$$\ast$}]{T }\end{DoxyParamCaption})}
+
+
+
+Permet de modifier le tableau contenant les elements du plateau. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em T} & \+: Objet\+Immobile$\ast$$\ast$ contenant le nouveau tableau \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{plateau_8cpp_source_l00104}{104}} of file \mbox{\hyperlink{plateau_8cpp_source}{plateau.\+cpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{plateau_8h}{plateau.\+h}}\item 
+\mbox{\hyperlink{plateau_8cpp}{plateau.\+cpp}}\end{DoxyCompactItemize}

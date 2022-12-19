@@ -38,29 +38,28 @@ public class Partie {
 	    	m_nbCaisses  = scanner.nextInt();
 	    	
 	    	m_plat = new Plateau(1,2, scanner); // ne fonctionne pas. Essayer avec scanner à la place? 
-	    	
+	    	m_perso = new Personnage();
 	        m_c = new Caisse[m_nbCaisses]; // En lancant un nouveau niveau, la liste m_c (contentant les caisses) doit etre construite en fonction du nombre de caisse m_nbCaisses du niveau
 	        for (int i=0; i<m_nbCaisses; i++)
 	             m_c[i] = new Caisse(); // Ne fonctionne pas: Aucune caisse est repérée
 	        for (int i=0; i<m_plat.getLargeur(); i++){
 	        	System.out.println("");
 	            for (int j=0; j<m_plat.getLongueur(); j++){
-	            	System.out.print(m_plat.getElt(i, j));
 	                if (m_plat.getTab()[i][j].getType() == '@' || m_plat.getTab()[i][j].getType() == '+') {
 	                    m_perso.setX(j);
 	                    m_perso.setY(i);	
-	                    m_perso.setImg(":/images/Joueur/playerDown.png");
+	                    m_perso.setImg("Joueur/playerDown.png");
 	                }
 	                if (m_plat.getTab()[i][j].getType() == '$'){
 	                    m_c[k].setX(j);
 	                    m_c[k].setY(i);
-	                    m_c[k].setImg(":/images/Caisse/caisse.png");
+	                    m_c[k].setImg("Caisse/caisse.png");
 	                    k++;
 	                }
 	                if (m_plat.getTab()[i][j].getType() == '*'){
 	                    m_c[k].setX(j);
 	                    m_c[k].setY(i);
-	                    m_c[k].setImg(":/images/Caisse/caisseSurCible.png");
+	                    m_c[k].setImg("Caisse/caisseSurCible.png");
 	                    k++;
 	                }
 	            }

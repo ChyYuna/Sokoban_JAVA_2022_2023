@@ -1,0 +1,148 @@
+\hypertarget{partie_8cpp_source}{}\doxysection{partie.\+cpp}
+\mbox{\hyperlink{partie_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00001}00001 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{partie_8h}{partie.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00011}\mbox{\hyperlink{class_partie_ae40831aad10fc4a391295e2ea1447b5a}{00011}} \mbox{\hyperlink{class_partie_ae40831aad10fc4a391295e2ea1447b5a}{Partie::Partie}}()\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00012}00012     m\_niv = 1;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00013}00013     m\_nbCaisses = 1;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00014}00014     m\_c = \textcolor{keyword}{new} \mbox{\hyperlink{class_caisse}{Caisse}}[m\_nbCaisses];}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00015}00015     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<m\_nbCaisses; i++)\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00016}00016         m\_c[i] = \mbox{\hyperlink{class_caisse}{Caisse}}();}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00017}00017     \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00018}00018     m\_plat = \textcolor{keyword}{new} \mbox{\hyperlink{class_plateau}{Plateau}};}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00019}00019     config = \textcolor{keyword}{new} \mbox{\hyperlink{class_configuration}{Configuration}};}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00020}00020     m\_perso = \textcolor{keyword}{new} \mbox{\hyperlink{class_personnage}{Personnage}};}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00021}00021 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00022}00022 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00027}\mbox{\hyperlink{class_partie_abd2a8276ec4ec3d355c346c1947ed01b}{00027}} \mbox{\hyperlink{class_partie_ae40831aad10fc4a391295e2ea1447b5a}{Partie::Partie}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_partie}{Partie}} \&part)\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00028}00028     m\_niv = part.m\_niv;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00029}00029     m\_nbCaisses = part.m\_nbCaisses;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00030}00030     m\_c = \textcolor{keyword}{new} \mbox{\hyperlink{class_caisse}{Caisse}}[part.m\_nbCaisses];}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00031}00031     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<part.m\_nbCaisses; i++)\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00032}00032         m\_c[i] = \mbox{\hyperlink{class_caisse}{Caisse}}();}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00033}00033     \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00034}00034     m\_plat = \textcolor{keyword}{new} \mbox{\hyperlink{class_plateau}{Plateau}}(part.m\_plat-\/>\mbox{\hyperlink{class_objet_a33f8b6a2c98c9fa5fb5c70f7ddd25fce}{getX}}(),part.m\_plat-\/>\mbox{\hyperlink{class_objet_adb27bf637a4bd7430f790c5e99c23ba8}{getY}}(),*part.m\_plat);}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00035}00035     config = \textcolor{keyword}{new} \mbox{\hyperlink{class_configuration}{Configuration}}(*part.config);}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00036}00036     m\_perso = \textcolor{keyword}{new} \mbox{\hyperlink{class_personnage}{Personnage}};}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00037}00037     *m\_perso = *part.m\_perso;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00038}00038 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00039}00039 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00040}00040 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00045}\mbox{\hyperlink{class_partie_a7b99af6588545b77fc14df88e5f55cbc}{00045}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_partie_a7b99af6588545b77fc14df88e5f55cbc}{Partie::lancerNiveau}}(\textcolor{keywordtype}{int} niv)\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00046}00046     ifstream fichier(to\_string(niv)+\textcolor{stringliteral}{"{}.txt"{}}, ios::in);}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00047}00047     \textcolor{keywordtype}{int} k=0; \textcolor{comment}{// L'entier k permet de numeroter les caisses et de les manipuler dans le tableau les contenant}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00048}00048 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00049}00049     \textcolor{keywordflow}{if}(!fichier.fail())\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00050}00050         fichier >> m\_niv >> m\_nbCaisses;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00051}00051 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00052}00052         m\_plat = \textcolor{keyword}{new} \mbox{\hyperlink{class_plateau}{Plateau}}(1,2,fichier); \textcolor{comment}{//On construit le plateau via ce constructeur qui va lire la suite du fichier}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00053}00053 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00054}00054         m\_c = \textcolor{keyword}{new} \mbox{\hyperlink{class_caisse}{Caisse}}[m\_nbCaisses]; \textcolor{comment}{// En lancant un nouveau niveau, la liste m\_c (contentant les caisses) doit etre construite en fonction du nombre de caisse m\_nbCaisses du niveau}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00055}00055         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<m\_nbCaisses; i++)}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00056}00056              m\_c[i] = \mbox{\hyperlink{class_caisse}{Caisse}}();}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00057}00057 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00058}00058         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<m\_plat-\/>\mbox{\hyperlink{class_plateau_a6b595fd1ae0f623aed1e82daaaa43915}{getLargeur}}(); i++)\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00059}00059             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0; j<m\_plat-\/>\mbox{\hyperlink{class_plateau_a5bb31cf61b30029ee4529371bcd9c88d}{getLongueur}}(); j++)\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00060}00060 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00061}00061                 \textcolor{keywordflow}{if} (m\_plat-\/>\mbox{\hyperlink{class_plateau_a3cbf383e2c0d89ffb62541e63ff4b8fd}{getTab}}()[i][j].\mbox{\hyperlink{class_objet_immobile_af6c15920f807aa63c1aedec833aa981f}{getType}}() == \textcolor{charliteral}{'@'} or m\_plat-\/>\mbox{\hyperlink{class_plateau_a3cbf383e2c0d89ffb62541e63ff4b8fd}{getTab}}()[i][j].\mbox{\hyperlink{class_objet_immobile_af6c15920f807aa63c1aedec833aa981f}{getType}}() == \textcolor{charliteral}{'+'}) \{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00062}00062                     m\_perso-\/>\mbox{\hyperlink{class_objet_adb78a270571df97835090261fbd16f7f}{setX}}(j);}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00063}00063                     m\_perso-\/>\mbox{\hyperlink{class_objet_ae8c9ec5421e9d7695ea9f7274a8b89ab}{setY}}(i);}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00064}00064                     m\_perso-\/>\mbox{\hyperlink{class_objet_mobile_a91e8ee52ee08222b7b1ed0dfc6be1aa4}{setImg}}(\textcolor{stringliteral}{"{}:/images/Joueur/playerDown.png"{}});}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00065}00065                 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00066}00066                 \textcolor{keywordflow}{if} (m\_plat-\/>\mbox{\hyperlink{class_plateau_a3cbf383e2c0d89ffb62541e63ff4b8fd}{getTab}}()[i][j].\mbox{\hyperlink{class_objet_immobile_af6c15920f807aa63c1aedec833aa981f}{getType}}() == \textcolor{charliteral}{'\$'})\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00067}00067                     m\_c[k].\mbox{\hyperlink{class_objet_adb78a270571df97835090261fbd16f7f}{setX}}(j);}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00068}00068                     m\_c[k].\mbox{\hyperlink{class_objet_ae8c9ec5421e9d7695ea9f7274a8b89ab}{setY}}(i);}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00069}00069                     m\_c[k].\mbox{\hyperlink{class_objet_mobile_a91e8ee52ee08222b7b1ed0dfc6be1aa4}{setImg}}(\textcolor{stringliteral}{"{}:/images/Caisse/caisse.png"{}});}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00070}00070                     k++;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00071}00071                 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00072}00072                 \textcolor{keywordflow}{if} (m\_plat-\/>\mbox{\hyperlink{class_plateau_a3cbf383e2c0d89ffb62541e63ff4b8fd}{getTab}}()[i][j].\mbox{\hyperlink{class_objet_immobile_af6c15920f807aa63c1aedec833aa981f}{getType}}() == \textcolor{charliteral}{'*'})\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00073}00073                     m\_c[k].\mbox{\hyperlink{class_objet_adb78a270571df97835090261fbd16f7f}{setX}}(j);}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00074}00074                     m\_c[k].\mbox{\hyperlink{class_objet_ae8c9ec5421e9d7695ea9f7274a8b89ab}{setY}}(i);}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00075}00075                     m\_c[k].\mbox{\hyperlink{class_objet_mobile_a91e8ee52ee08222b7b1ed0dfc6be1aa4}{setImg}}(\textcolor{stringliteral}{"{}:/images/Caisse/caisseSurCible.png"{}});}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00076}00076                     k++;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00077}00077                 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00078}00078             \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00079}00079         \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00080}00080         fichier.close();}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00081}00081      \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00082}00082      \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00083}00083         cerr << \textcolor{stringliteral}{"{}Impossible d'ouvrir le fichier !"{}} << endl;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00084}00084 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00089}\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{00089}} \mbox{\hyperlink{class_plateau}{Plateau}}* \mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{Partie::getPlateau}}()\textcolor{keyword}{ const}\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00090}00090     \textcolor{keywordflow}{return} m\_plat;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00091}00091 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00092}00092 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00097}\mbox{\hyperlink{class_partie_aa8f54b789266289006ee98a7db70269d}{00097}} \mbox{\hyperlink{class_configuration}{Configuration}}* \mbox{\hyperlink{class_partie_aa8f54b789266289006ee98a7db70269d}{Partie::getConfig}}()\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00098}00098     \textcolor{keywordflow}{return} config;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00099}00099 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00100}00100 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00105}\mbox{\hyperlink{class_partie_abf297028688f7ef9be5ae8a6c9b2324f}{00105}} \mbox{\hyperlink{class_caisse}{Caisse}}* \mbox{\hyperlink{class_partie_abf297028688f7ef9be5ae8a6c9b2324f}{Partie::getCaisses}}()\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00106}00106     \textcolor{keywordflow}{return} m\_c;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00107}00107 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00108}00108 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00113}\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{00113}} \mbox{\hyperlink{class_personnage}{Personnage}}* \mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{Partie::getPerso}}()\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00114}00114     \textcolor{keywordflow}{return} m\_perso;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00115}00115 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00116}00116 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00121}\mbox{\hyperlink{class_partie_a213a0de842d8dbbdddb3c82097e62e47}{00121}} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_partie_a213a0de842d8dbbdddb3c82097e62e47}{Partie::getNiv}}()\textcolor{keyword}{ const}\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00122}00122     \textcolor{keywordflow}{return} m\_niv;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00123}00123 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00124}00124 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00129}\mbox{\hyperlink{class_partie_a6f01d665b2b5d098295dc4545ba608ce}{00129}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_partie_a6f01d665b2b5d098295dc4545ba608ce}{Partie::setNiv}}(\textcolor{keywordtype}{int} n)\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00130}00130     m\_niv=n;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00131}00131 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00132}00132 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00136}\mbox{\hyperlink{class_partie_a345bac30b0b398333c2bde2ad218f1f6}{00136}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_partie_a345bac30b0b398333c2bde2ad218f1f6}{Partie::recommencerNiveau}}()\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00137}00137     this-\/>\mbox{\hyperlink{class_partie_a7b99af6588545b77fc14df88e5f55cbc}{lancerNiveau}}(m\_niv);}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00138}00138 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00139}00139 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00144}\mbox{\hyperlink{class_partie_a16d9f6f30f36b61c3a8e4492d1d7e44c}{00144}} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_partie_a16d9f6f30f36b61c3a8e4492d1d7e44c}{Partie::getNbCaisses}}()\textcolor{keyword}{const}\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00145}00145     \textcolor{keywordflow}{return} m\_nbCaisses;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00146}00146 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00147}00147 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00152}\mbox{\hyperlink{class_partie_ae1290881ff4b79be8e84e4c2b2638994}{00152}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_partie_ae1290881ff4b79be8e84e4c2b2638994}{Partie::setNbCaisses}}(\textcolor{keywordtype}{int} nbCaisses)\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00153}00153     m\_nbCaisses=nbCaisses;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00154}00154 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00155}00155 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00162}\mbox{\hyperlink{class_partie_afedb6e6e38549f1346886486d1ccccb1}{00162}} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_partie_afedb6e6e38549f1346886486d1ccccb1}{Partie::estCaisse}}(\textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y)\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00163}00163     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<m\_nbCaisses; i++)\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00164}00164         \textcolor{keywordflow}{if}(m\_c[i].getX()==x \&\& m\_c[i].getY()==y)}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00165}00165             \textcolor{keywordflow}{return} i;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00166}00166     \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00167}00167     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00168}00168 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00169}00169 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00176}\mbox{\hyperlink{class_partie_a6289fef51d823029f1ba824ec90619ab}{00176}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_partie_a6289fef51d823029f1ba824ec90619ab}{Partie::estVide}}(\textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y) \{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00177}00177     \textcolor{keywordflow}{return} (m\_plat-\/>\mbox{\hyperlink{class_plateau_a3cbf383e2c0d89ffb62541e63ff4b8fd}{getTab}}()[y][x].\mbox{\hyperlink{class_objet_immobile_af6c15920f807aa63c1aedec833aa981f}{getType}}() != \textcolor{charliteral}{'\#'} \&\& \mbox{\hyperlink{class_partie_afedb6e6e38549f1346886486d1ccccb1}{estCaisse}}(x,y)==-\/1);}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00178}00178 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00179}00179 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00185}\mbox{\hyperlink{class_partie_a71fea36b5a3ac55bf4c729cba546d6b6}{00185}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_partie_a71fea36b5a3ac55bf4c729cba546d6b6}{Partie::caisseSurCible}}(\mbox{\hyperlink{class_caisse}{Caisse}} \&c)\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00186}00186     \textcolor{keywordtype}{char} type = m\_plat-\/>\mbox{\hyperlink{class_plateau_a3cbf383e2c0d89ffb62541e63ff4b8fd}{getTab}}()[c.\mbox{\hyperlink{class_objet_adb27bf637a4bd7430f790c5e99c23ba8}{getY}}()][c.\mbox{\hyperlink{class_objet_a33f8b6a2c98c9fa5fb5c70f7ddd25fce}{getX}}()].\mbox{\hyperlink{class_objet_immobile_af6c15920f807aa63c1aedec833aa981f}{getType}}();}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00187}00187     \textcolor{keywordflow}{if}(type==\textcolor{charliteral}{'.'} or type==\textcolor{charliteral}{'+'} or type==\textcolor{charliteral}{'*'})\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00188}00188         c.\mbox{\hyperlink{class_objet_mobile_a91e8ee52ee08222b7b1ed0dfc6be1aa4}{setImg}}(\textcolor{stringliteral}{"{}:/images/Caisse/caisseSurCible.png"{}});}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00189}00189         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00190}00190      \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00191}00191      \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00192}00192         c.\mbox{\hyperlink{class_objet_mobile_a91e8ee52ee08222b7b1ed0dfc6be1aa4}{setImg}}(\textcolor{stringliteral}{"{}:/images/Caisse/caisse.png"{}});}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00193}00193         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00194}00194     \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00195}00195 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00196}00196 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00197}00197 \textcolor{comment}{//Renvoie vrai si le niveau est termine et faux sinon}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00202}\mbox{\hyperlink{class_partie_ae5ad458eba59235d21bfdbae404bc532}{00202}} \textcolor{comment}{}\textcolor{keywordtype}{bool} \mbox{\hyperlink{class_partie_ae5ad458eba59235d21bfdbae404bc532}{Partie::victoire}}()\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00203}00203     \textcolor{keywordtype}{int} k=0;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00204}00204     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<m\_nbCaisses; i++)\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00205}00205         \textcolor{keywordflow}{if}(this-\/>\mbox{\hyperlink{class_partie_a71fea36b5a3ac55bf4c729cba546d6b6}{caisseSurCible}}(m\_c[i]))}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00206}00206             k++;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00207}00207     \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00208}00208     \textcolor{keywordflow}{return}(k==m\_nbCaisses);}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00209}00209 \}}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00210}00210 }
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00214}\mbox{\hyperlink{class_partie_ae4afeb7336bb84427272cfb7018b5e3d}{00214}} \mbox{\hyperlink{class_partie_ae4afeb7336bb84427272cfb7018b5e3d}{Partie::\string~Partie}}()\{}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00215}00215     \textcolor{keyword}{delete} m\_plat;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00216}00216     \textcolor{keyword}{delete} m\_perso;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00217}00217     \textcolor{keyword}{delete}[] m\_c;}
+\DoxyCodeLine{\Hypertarget{partie_8cpp_source_l00218}00218 \}}
+
+\end{DoxyCode}

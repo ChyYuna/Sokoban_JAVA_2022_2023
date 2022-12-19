@@ -1,0 +1,76 @@
+\hypertarget{plateau_8cpp_source}{}\doxysection{plateau.\+cpp}
+\mbox{\hyperlink{plateau_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00001}00001 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{plateau_8h}{plateau.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00015}\mbox{\hyperlink{class_plateau_ab4723e56bee8b01588c57a93d7164604}{00015}} \mbox{\hyperlink{class_plateau_ab4723e56bee8b01588c57a93d7164604}{Plateau::Plateau}}(\textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y, \textcolor{keywordtype}{int} la, \textcolor{keywordtype}{int} lo):\mbox{\hyperlink{class_objet}{Objet}}(x,y)}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00016}00016 \{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00017}00017     m\_la=la;}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00018}00018     m\_lo=lo;}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00019}00019     tab = \textcolor{keyword}{new} \mbox{\hyperlink{class_objet_immobile}{ObjetImmobile}}*[m\_la];}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00020}00020     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<m\_la; i++)\{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00021}00021         tab[i] = \textcolor{keyword}{new} \mbox{\hyperlink{class_objet_immobile}{ObjetImmobile}}[m\_lo];}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00022}00022         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0; j<m\_lo; j++)\{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00023}00023             tab[i][j] = \mbox{\hyperlink{class_objet_immobile}{ObjetImmobile}}(i,j,\textcolor{charliteral}{'\_'});}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00024}00024         \}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00025}00025     \}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00026}00026 \}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00027}00027 }
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00034}\mbox{\hyperlink{class_plateau_a0dd008fd50feb78c0f84c974d0960878}{00034}} \mbox{\hyperlink{class_plateau_ab4723e56bee8b01588c57a93d7164604}{Plateau::Plateau}}(\textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y, \textcolor{keyword}{const} \mbox{\hyperlink{class_plateau}{Plateau}} \&p):\mbox{\hyperlink{class_objet}{Objet}}(x,y)}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00035}00035 \{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00036}00036     m\_la=p.m\_la;}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00037}00037     m\_lo=p.m\_lo;}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00038}00038     tab = \textcolor{keyword}{new} \mbox{\hyperlink{class_objet_immobile}{ObjetImmobile}}*[p.m\_la];}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00039}00039     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<p.m\_la; i++)\{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00040}00040         tab[i] = \textcolor{keyword}{new} \mbox{\hyperlink{class_objet_immobile}{ObjetImmobile}}[p.m\_lo];}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00041}00041         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0; j<p.m\_lo; j++)\{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00042}00042             tab[i][j] = \mbox{\hyperlink{class_objet_immobile}{ObjetImmobile}}(i,j,p.tab[i][j].\mbox{\hyperlink{class_objet_immobile_af6c15920f807aa63c1aedec833aa981f}{getType}}());}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00043}00043         \}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00044}00044     \}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00045}00045 \}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00046}00046 }
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00053}\mbox{\hyperlink{class_plateau_a23a334016ffa21ba8a2ad4dc4add3dfe}{00053}} \mbox{\hyperlink{class_plateau_ab4723e56bee8b01588c57a93d7164604}{Plateau::Plateau}}(\textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y, ifstream \&fichier):\mbox{\hyperlink{class_objet}{Objet}}(x,y)}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00054}00054 \{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00055}00055     \textcolor{keywordtype}{char} type;}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00056}00056     fichier >> m\_la >> m\_lo;}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00057}00057 }
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00058}00058     tab = \textcolor{keyword}{new} \mbox{\hyperlink{class_objet_immobile}{ObjetImmobile}}*[m\_la];}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00059}00059     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<m\_la; i++)\{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00060}00060         tab[i] = \textcolor{keyword}{new} \mbox{\hyperlink{class_objet_immobile}{ObjetImmobile}}[m\_lo];}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00061}00061         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0; j<m\_lo; j++)\{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00062}00062             fichier >> type;}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00063}00063             tab[i][j].\mbox{\hyperlink{class_objet_immobile_a6b838d5849232148420e43e3c05ad5ad}{setType}}(type);}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00064}00064            \}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00065}00065     \}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00066}00066 \}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00067}00067 }
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00071}\mbox{\hyperlink{class_plateau_a0e6ae72e4d7e9923f996c1247e6a6c8b}{00071}} \mbox{\hyperlink{class_plateau_a0e6ae72e4d7e9923f996c1247e6a6c8b}{Plateau::\string~Plateau}}()\{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00072}00072     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<m\_la; i++)}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00073}00073         \textcolor{keyword}{delete}[] tab[i];}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00074}00074 \}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00075}00075 }
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00080}\mbox{\hyperlink{class_plateau_a3cbf383e2c0d89ffb62541e63ff4b8fd}{00080}} \mbox{\hyperlink{class_objet_immobile}{ObjetImmobile}}** \mbox{\hyperlink{class_plateau_a3cbf383e2c0d89ffb62541e63ff4b8fd}{Plateau::getTab}}()\textcolor{keyword}{ const}\{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00081}00081     \textcolor{keywordflow}{return} tab;}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00082}00082 \}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00083}00083 }
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00088}\mbox{\hyperlink{class_plateau_a6b595fd1ae0f623aed1e82daaaa43915}{00088}} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_plateau_a6b595fd1ae0f623aed1e82daaaa43915}{Plateau::getLargeur}}()\{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00089}00089     \textcolor{keywordflow}{return} m\_la;}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00090}00090 \}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00091}00091 }
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00096}\mbox{\hyperlink{class_plateau_a5bb31cf61b30029ee4529371bcd9c88d}{00096}} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_plateau_a5bb31cf61b30029ee4529371bcd9c88d}{Plateau::getLongueur}}()\{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00097}00097     \textcolor{keywordflow}{return} m\_lo;}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00098}00098 \}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00099}00099 }
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00104}\mbox{\hyperlink{class_plateau_ada523f34824fa7f90d49084b5f5fead4}{00104}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_plateau_ada523f34824fa7f90d49084b5f5fead4}{Plateau::setTab}}(\mbox{\hyperlink{class_objet_immobile}{ObjetImmobile}}** T)\{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00105}00105     tab = T;}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00106}00106 \}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00107}00107 }
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00112}\mbox{\hyperlink{class_plateau_a77de3bbc917fe10cf339504c4343cc6f}{00112}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_plateau_a77de3bbc917fe10cf339504c4343cc6f}{Plateau::setLargeur}}(\textcolor{keywordtype}{int} largeur)\{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00113}00113     m\_la = largeur;}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00114}00114 \}}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00115}00115 }
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00120}\mbox{\hyperlink{class_plateau_a7ecd4c2d0651aebe29cdd68071bc9477}{00120}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_plateau_a7ecd4c2d0651aebe29cdd68071bc9477}{Plateau::setLongueur}}(\textcolor{keywordtype}{int} longueur)\{}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00121}00121     m\_lo = longueur;}
+\DoxyCodeLine{\Hypertarget{plateau_8cpp_source_l00122}00122 \}}
+
+\end{DoxyCode}

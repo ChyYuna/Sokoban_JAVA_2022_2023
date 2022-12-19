@@ -1,0 +1,267 @@
+\hypertarget{mainwindow_8cpp_source}{}\doxysection{mainwindow.\+cpp}
+\mbox{\hyperlink{mainwindow_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00001}00001 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mainwindow_8h}{mainwindow.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00002}00002 \textcolor{preprocessor}{\#include "{}ui\_mainwindow.h"{}}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00003}00003 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{optionswindow_8h}{optionswindow.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00004}00004 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{aidewindow_8h}{aidewindow.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00005}00005 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00016}\mbox{\hyperlink{class_main_window_a8b244be8b7b7db1b08de2a2acb9409db}{00016}} \mbox{\hyperlink{class_main_window_a8b244be8b7b7db1b08de2a2acb9409db}{MainWindow::MainWindow}}(QWidget *parent)}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00017}00017     : QMainWindow(parent)}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00018}00018     , ui(new Ui::\mbox{\hyperlink{class_main_window}{MainWindow}})}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00019}00019 \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00020}00020     ui-\/>setupUi(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00021}00021     setWindowTitle(\textcolor{stringliteral}{"{}MonSokoban"{}});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00022}00022     part = \textcolor{keyword}{new} \mbox{\hyperlink{class_partie}{Partie}};}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00023}00023     menu = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00024}00024     pas=50; \textcolor{comment}{//correspond à la distance entre chaque centre d'objet (caisse, mur...)}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00025}00025 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00026}00026     move(QGuiApplication::screens().at(0)-\/>geometry().center() -\/ frameGeometry().center()); \textcolor{comment}{//deplace la fenetre au centre de l'ecran}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00027}00027     this-\/>setFixedSize(this-\/>size()); \textcolor{comment}{//fixe la taille de la fenetre definitivement}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00029}00029     \textcolor{comment}{//Configuration du bouton Recommencer}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00030}00030     ui-\/>bRecommencerNiv-\/>setStyleSheet(\textcolor{stringliteral}{"{}QPushButton\{font-\/size: 21px;font-\/family: Montserrat;font-\/weight: bold;color: rgb(255, 255, 255);background-\/color: rgb(220,20,60);border-\/radius: 10px;\}"{}});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00031}00031     ui-\/>bRecommencerNiv-\/>setIcon(QIcon (\textcolor{stringliteral}{"{}:/images/Icones/restart.png"{}}));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00032}00032     ui-\/>bRecommencerNiv-\/>setIconSize(QSize (30,30));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00033}00033 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00034}00034     \textcolor{comment}{//Configuration du bouton Menu}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00035}00035     ui-\/>bMenu-\/>setStyleSheet(\textcolor{stringliteral}{"{}QPushButton\{font-\/size: 22px;font-\/family: Montserrat;font-\/weight: bold;color: rgb(255, 255, 255);background-\/color: rgb(60,179,113);border-\/radius: 10px;\}"{}});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00036}00036     ui-\/>bMenu-\/>setIcon(QIcon (\textcolor{stringliteral}{"{}:/images/Icones/menu.png"{}}));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00037}00037     ui-\/>bMenu-\/>setIconSize(QSize (30,30));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00038}00038 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00039}00039     \textcolor{comment}{//Configuration du bouton Configuration}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00040}00040     ui-\/>bOptions-\/>setStyleSheet(\textcolor{stringliteral}{"{}QPushButton\{font-\/size: 20px;font-\/family: Montserrat;font-\/weight: bold;color: rgb(255, 255, 255);background-\/color: rgb(138,43,226);border-\/radius: 10px;\}"{}});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00041}00041     ui-\/>bOptions-\/>setIcon(QIcon (\textcolor{stringliteral}{"{}:/images/Icones/options.png"{}}));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00042}00042     ui-\/>bOptions-\/>setIconSize(QSize (40,40));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00043}00043 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00044}00044     \textcolor{comment}{//Configuration du bouton Jouer}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00045}00045     ui-\/>bJouer-\/>setStyleSheet(\textcolor{stringliteral}{"{}QPushButton\{font-\/size: 30px;font-\/family: Montserrat;font-\/weight: bold;color: rgb(255, 255, 255);background-\/color: rgb(251,177,13);border-\/radius: 10px;\}"{}});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00046}00046     ui-\/>bJouer-\/>setIcon(QIcon (\textcolor{stringliteral}{"{}:/images/Icones/play.png"{}}));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00047}00047     ui-\/>bJouer-\/>setIconSize(QSize (40,40));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00048}00048 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00049}00049     \textcolor{comment}{//Configuration du bouton Aide}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00050}00050     ui-\/>bAide-\/>setStyleSheet(\textcolor{stringliteral}{"{}QPushButton\{font-\/size: 20px;font-\/family: Montserrat;font-\/weight: bold;color: rgb(255, 255, 255);background-\/color: rgb(254,168,119);border-\/radius: 10px;\}"{}});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00051}00051     ui-\/>bAide-\/>setIcon(QIcon (\textcolor{stringliteral}{"{}:/images/Icones/aide.png"{}}));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00052}00052     ui-\/>bAide-\/>setIconSize(QSize (20,20));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00053}00053 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00054}00054     \textcolor{comment}{//Lancement du premier niveau}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00055}00055     part-\/>\mbox{\hyperlink{class_partie_a7b99af6588545b77fc14df88e5f55cbc}{lancerNiveau}}(1);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00056}00056 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00057}00057     this-\/>setFocus(Qt::TabFocusReason); \textcolor{comment}{//permet de "{}focus"{} les entrees clavier sur le deplacement du personnage et non sur les boutons}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00058}00058 \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00059}00059 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00063}\mbox{\hyperlink{class_main_window_ae98d00a93bc118200eeef9f9bba1dba7}{00063}} \mbox{\hyperlink{class_main_window_ae98d00a93bc118200eeef9f9bba1dba7}{MainWindow::\string~MainWindow}}()}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00064}00064 \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00065}00065     \textcolor{keyword}{delete} ui;}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00066}00066     \textcolor{keyword}{delete} part;}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00067}00067 \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00068}00068 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00073}00073 \textcolor{keywordtype}{void} MainWindow::paintEvent(QPaintEvent* e) \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00074}00074      QWidget::paintEvent(e);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00075}00075      QPainter painter(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00076}00076      \textcolor{keywordtype}{char} type;}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00077}00077 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00078}00078      \textcolor{keywordflow}{if} (menu) \textcolor{comment}{//on affiche le menu}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00079}00079      \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00080}00080         painter.drawPixmap(0,0,1310,580,QPixmap(\textcolor{stringliteral}{"{}:/images/menu.png"{}}));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00081}00081 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00082}00082         \textcolor{comment}{//Sur le menu, on rend invisible les boutons Menu et Recommencer et visible le bouton Jouer}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00083}00083         ui-\/>bRecommencerNiv-\/>setVisible(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00084}00084         ui-\/>bMenu-\/>setVisible(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00085}00085         ui-\/>bJouer-\/>setVisible(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00086}00086         ui-\/>line-\/>setVisible(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00087}00087      \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00088}00088 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00089}00089      \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00090}00090          painter.drawPixmap(0,0,1000,580,QPixmap(\textcolor{stringliteral}{"{}:/images/background.png"{}}));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00091}00091 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00092}00092          \textcolor{comment}{//Sur l'interface de jeu, on rend invisible le bouton Jouer et visible les boutons Menu et Recommencer}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00093}00093          ui-\/>bJouer-\/>setVisible(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00094}00094          ui-\/>bRecommencerNiv-\/>setVisible(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00095}00095          ui-\/>bMenu-\/>setVisible(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00096}00096          ui-\/>line-\/>setVisible(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00097}00097 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00098}00098          \textcolor{comment}{//Affichage du plateau du niveau charge}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00099}00099          \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>getLargeur(); i++)\{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00100}00100              \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0; j<part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>getLongueur(); j++)\{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00101}00101                  type = part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>\mbox{\hyperlink{class_plateau_a3cbf383e2c0d89ffb62541e63ff4b8fd}{getTab}}()[i][j].\mbox{\hyperlink{class_objet_immobile_af6c15920f807aa63c1aedec833aa981f}{getType}}();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00102}00102                  \textcolor{keywordflow}{if} ( type == \textcolor{charliteral}{'\#'})\{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00103}00103                      painter.drawPixmap((j+part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>\mbox{\hyperlink{class_objet_a33f8b6a2c98c9fa5fb5c70f7ddd25fce}{getX}}())*pas,(i+part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>\mbox{\hyperlink{class_objet_adb27bf637a4bd7430f790c5e99c23ba8}{getY}}())*pas,50,50,QPixmap(\textcolor{stringliteral}{"{}:/images/Autres/vide.png"{}}));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00104}00104                      painter.drawPixmap((j+part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>\mbox{\hyperlink{class_objet_a33f8b6a2c98c9fa5fb5c70f7ddd25fce}{getX}}())*pas,(i+part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>\mbox{\hyperlink{class_objet_adb27bf637a4bd7430f790c5e99c23ba8}{getY}}())*pas,50,50,QPixmap(\textcolor{stringliteral}{"{}:/images/Autres/mur.png"{}}));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00105}00105                  \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00106}00106                  \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type == \textcolor{charliteral}{'.'} or type== \textcolor{charliteral}{'*'} or type == \textcolor{charliteral}{'+'})\{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00107}00107                      painter.drawPixmap((j+part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>\mbox{\hyperlink{class_objet_a33f8b6a2c98c9fa5fb5c70f7ddd25fce}{getX}}())*pas,(i+part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>\mbox{\hyperlink{class_objet_adb27bf637a4bd7430f790c5e99c23ba8}{getY}}())*pas,50,50,QPixmap(\textcolor{stringliteral}{"{}:/images/Autres/vide.png"{}}));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00108}00108                      painter.drawPixmap((j+part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>\mbox{\hyperlink{class_objet_a33f8b6a2c98c9fa5fb5c70f7ddd25fce}{getX}}())*pas,(i+part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>\mbox{\hyperlink{class_objet_adb27bf637a4bd7430f790c5e99c23ba8}{getY}}())*pas,50,50,QPixmap(\textcolor{stringliteral}{"{}:/images/Autres/cible.png"{}}));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00109}00109                  \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00110}00110                  \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00111}00111                      painter.drawPixmap((j+part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>\mbox{\hyperlink{class_objet_a33f8b6a2c98c9fa5fb5c70f7ddd25fce}{getX}}())*pas,(i+part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>\mbox{\hyperlink{class_objet_adb27bf637a4bd7430f790c5e99c23ba8}{getY}}())*pas,50,50,QPixmap(\textcolor{stringliteral}{"{}:/images/Autres/vide.png"{}}));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00112}00112              \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00113}00113          \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00114}00114 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00115}00115          \textcolor{comment}{//Affichage des caises et du personnage du niveau charge}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00116}00116          \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<part-\/>\mbox{\hyperlink{class_partie_a16d9f6f30f36b61c3a8e4492d1d7e44c}{getNbCaisses}}(); i++)}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00117}00117              painter.drawPixmap((part-\/>\mbox{\hyperlink{class_partie_abf297028688f7ef9be5ae8a6c9b2324f}{getCaisses}}()[i].\mbox{\hyperlink{class_objet_a33f8b6a2c98c9fa5fb5c70f7ddd25fce}{getX}}()+ part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>\mbox{\hyperlink{class_objet_a33f8b6a2c98c9fa5fb5c70f7ddd25fce}{getX}}())*pas,(part-\/>\mbox{\hyperlink{class_partie_abf297028688f7ef9be5ae8a6c9b2324f}{getCaisses}}()[i].\mbox{\hyperlink{class_objet_adb27bf637a4bd7430f790c5e99c23ba8}{getY}}()+ part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>\mbox{\hyperlink{class_objet_adb27bf637a4bd7430f790c5e99c23ba8}{getY}}())*pas,50,50,QPixmap(part-\/>\mbox{\hyperlink{class_partie_abf297028688f7ef9be5ae8a6c9b2324f}{getCaisses}}()[i].\mbox{\hyperlink{class_objet_mobile_aae3c579d14551092a0cc3ed865e0a026}{getImg}}()));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00118}00118 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00119}00119          painter.drawPixmap((part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_a33f8b6a2c98c9fa5fb5c70f7ddd25fce}{getX}}() + part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>\mbox{\hyperlink{class_objet_a33f8b6a2c98c9fa5fb5c70f7ddd25fce}{getX}}())*pas,(part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_adb27bf637a4bd7430f790c5e99c23ba8}{getY}}()+ part-\/>\mbox{\hyperlink{class_partie_a786a4e6906fb3bf1d6492b3ffaae821b}{getPlateau}}()-\/>\mbox{\hyperlink{class_objet_adb27bf637a4bd7430f790c5e99c23ba8}{getY}}())*pas,50,50,QPixmap(part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_mobile_aae3c579d14551092a0cc3ed865e0a026}{getImg}}()));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00120}00120 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00121}00121         \textcolor{comment}{//Affichage du numero du niveau actuel}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00122}00122          painter.setPen(QPen(Qt::darkGreen,1));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00123}00123          painter.setFont(QFont(\textcolor{stringliteral}{"{}Molot"{}},38));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00124}00124          painter.drawText(10,50,QString(\textcolor{stringliteral}{"{}Niveau "{}}+QString::number(part-\/>\mbox{\hyperlink{class_partie_a213a0de842d8dbbdddb3c82097e62e47}{getNiv}}())));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00125}00125 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00126}00126          \textcolor{comment}{//Affichage du code d'acces du niveau}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00127}00127          painter.setPen(QPen(Qt::black,1));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00128}00128          painter.setFont(QFont(\textcolor{stringliteral}{"{}Arial"{}},15,QFont::Bold));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00129}00129          painter.drawText(1030,80,QString(\textcolor{stringliteral}{"{}Code du niveau : "{}} + part-\/>\mbox{\hyperlink{class_partie_aa8f54b789266289006ee98a7db70269d}{getConfig}}()-\/>\mbox{\hyperlink{class_configuration_ae2b57efa265533af9dcb3df22c16c3f7}{getListeCodes}}()[part-\/>\mbox{\hyperlink{class_partie_a213a0de842d8dbbdddb3c82097e62e47}{getNiv}}()-\/1]));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00130}00130      \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00131}00131 \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00132}00132 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00137}00137 \textcolor{keywordtype}{void} MainWindow::keyPressEvent (QKeyEvent * event) \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00138}00138     \textcolor{keywordtype}{int} numCaisse;}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00139}00139     \textcolor{keywordtype}{int} x\_perso = part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_a33f8b6a2c98c9fa5fb5c70f7ddd25fce}{getX}}();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00140}00140     \textcolor{keywordtype}{int} y\_perso = part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_adb27bf637a4bd7430f790c5e99c23ba8}{getY}}();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00141}00141 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00142}00142     \textcolor{keywordflow}{switch}(event-\/>key())\{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00143}00143      \textcolor{keywordflow}{case} Qt::Key\_Up :}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00144}00144         numCaisse = part-\/>\mbox{\hyperlink{class_partie_afedb6e6e38549f1346886486d1ccccb1}{estCaisse}}(x\_perso,y\_perso-\/1);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00145}00145         \textcolor{keywordflow}{if} (part-\/>\mbox{\hyperlink{class_partie_a6289fef51d823029f1ba824ec90619ab}{estVide}}(x\_perso,y\_perso-\/1)) \textcolor{comment}{//Si la case en haut du personnage est vide, on le deplace}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00146}00146             part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_mobile_ab4ab5fb0dcec4357425bfa6b1d77dd71}{deplacerDe}}(0,-\/1);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00147}00147         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (numCaisse!=-\/1 and part-\/>\mbox{\hyperlink{class_partie_a6289fef51d823029f1ba824ec90619ab}{estVide}}(x\_perso,y\_perso-\/2)) \textcolor{comment}{//Sinon si la case en haut du personnage contient une caisse et que la case d'apres est vide, on deplace les deux}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00148}00148         \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00149}00149             part-\/>\mbox{\hyperlink{class_partie_abf297028688f7ef9be5ae8a6c9b2324f}{getCaisses}}()[numCaisse].\mbox{\hyperlink{class_objet_mobile_ab4ab5fb0dcec4357425bfa6b1d77dd71}{deplacerDe}}(0,-\/1);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00150}00150             part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_mobile_ab4ab5fb0dcec4357425bfa6b1d77dd71}{deplacerDe}}(0,-\/1);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00151}00151         \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00152}00152         part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_mobile_a91e8ee52ee08222b7b1ed0dfc6be1aa4}{setImg}}(\textcolor{stringliteral}{"{}:/images/Joueur/playerUp.png"{}});  \textcolor{comment}{//On affiche le personnage dans la direction du deplacement effectue}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00153}00153         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00154}00154 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00155}00155      \textcolor{keywordflow}{case} Qt::Key\_Left :}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00156}00156         numCaisse = part-\/>\mbox{\hyperlink{class_partie_afedb6e6e38549f1346886486d1ccccb1}{estCaisse}}(x\_perso-\/1,y\_perso);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00157}00157         \textcolor{keywordflow}{if} (part-\/>\mbox{\hyperlink{class_partie_a6289fef51d823029f1ba824ec90619ab}{estVide}}(x\_perso-\/1,y\_perso)) \textcolor{comment}{//Si la case a gauche du personnage est vide, on le deplace}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00158}00158             part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_mobile_ab4ab5fb0dcec4357425bfa6b1d77dd71}{deplacerDe}}(-\/1,0);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00159}00159         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (numCaisse!=-\/1 and part-\/>\mbox{\hyperlink{class_partie_a6289fef51d823029f1ba824ec90619ab}{estVide}}(x\_perso-\/2,y\_perso)) \textcolor{comment}{//Sinon si la case a gauche du personnage contient une caisse et que la case d'apres est vide, on deplace les deux}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00160}00160         \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00161}00161             part-\/>\mbox{\hyperlink{class_partie_abf297028688f7ef9be5ae8a6c9b2324f}{getCaisses}}()[numCaisse].\mbox{\hyperlink{class_objet_mobile_ab4ab5fb0dcec4357425bfa6b1d77dd71}{deplacerDe}}(-\/1,0);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00162}00162             part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_mobile_ab4ab5fb0dcec4357425bfa6b1d77dd71}{deplacerDe}}(-\/1,0);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00163}00163         \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00164}00164         part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_mobile_a91e8ee52ee08222b7b1ed0dfc6be1aa4}{setImg}}(\textcolor{stringliteral}{"{}:/images/Joueur/playerLeft.png"{}});  \textcolor{comment}{//On affiche le personnage dans la direction du deplacement effectue}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00165}00165         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00166}00166 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00167}00167      \textcolor{keywordflow}{case} Qt::Key\_Down :}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00168}00168         numCaisse = part-\/>\mbox{\hyperlink{class_partie_afedb6e6e38549f1346886486d1ccccb1}{estCaisse}}(x\_perso,y\_perso+1);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00169}00169         \textcolor{keywordflow}{if} (part-\/>\mbox{\hyperlink{class_partie_a6289fef51d823029f1ba824ec90619ab}{estVide}}(x\_perso,y\_perso + 1))  \textcolor{comment}{//Si la case en bas du personnage est vide, on le deplace}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00170}00170             part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_mobile_ab4ab5fb0dcec4357425bfa6b1d77dd71}{deplacerDe}}(0,1);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00171}00171         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (numCaisse!=-\/1 and part-\/>\mbox{\hyperlink{class_partie_a6289fef51d823029f1ba824ec90619ab}{estVide}}(x\_perso,y\_perso+2))  \textcolor{comment}{//Sinon si la case en bas du personnage contient une caisse et que la case d'apres est vide, on deplace les deux}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00172}00172         \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00173}00173             part-\/>\mbox{\hyperlink{class_partie_abf297028688f7ef9be5ae8a6c9b2324f}{getCaisses}}()[numCaisse].\mbox{\hyperlink{class_objet_mobile_ab4ab5fb0dcec4357425bfa6b1d77dd71}{deplacerDe}}(0,1);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00174}00174             part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_mobile_ab4ab5fb0dcec4357425bfa6b1d77dd71}{deplacerDe}}(0,1);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00175}00175         \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00176}00176         part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_mobile_a91e8ee52ee08222b7b1ed0dfc6be1aa4}{setImg}}(\textcolor{stringliteral}{"{}:/images/Joueur/playerDown.png"{}});  \textcolor{comment}{//On affiche le personnage dans la direction du deplacement effectue}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00177}00177         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00178}00178 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00179}00179      \textcolor{keywordflow}{case} Qt::Key\_Right :}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00180}00180         numCaisse = part-\/>\mbox{\hyperlink{class_partie_afedb6e6e38549f1346886486d1ccccb1}{estCaisse}}(x\_perso+1,y\_perso); \textcolor{comment}{//Si la case a droite du personnage est vide, on le deplace}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00181}00181         \textcolor{keywordflow}{if} (part-\/>\mbox{\hyperlink{class_partie_a6289fef51d823029f1ba824ec90619ab}{estVide}}(x\_perso + 1,y\_perso))}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00182}00182             part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_mobile_ab4ab5fb0dcec4357425bfa6b1d77dd71}{deplacerDe}}(1,0);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00183}00183         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (numCaisse!=-\/1 and part-\/>\mbox{\hyperlink{class_partie_a6289fef51d823029f1ba824ec90619ab}{estVide}}(x\_perso+2,y\_perso))  \textcolor{comment}{//Sinon si la case a droite du personnage contient une caisse et que la case d'apres est vide, on deplace les deux}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00184}00184         \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00185}00185             part-\/>\mbox{\hyperlink{class_partie_abf297028688f7ef9be5ae8a6c9b2324f}{getCaisses}}()[numCaisse].\mbox{\hyperlink{class_objet_mobile_ab4ab5fb0dcec4357425bfa6b1d77dd71}{deplacerDe}}(1,0);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00186}00186             part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_mobile_ab4ab5fb0dcec4357425bfa6b1d77dd71}{deplacerDe}}(1,0);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00187}00187         \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00188}00188         part-\/>\mbox{\hyperlink{class_partie_a2000a0684d562b0661392db4493fc5f0}{getPerso}}()-\/>\mbox{\hyperlink{class_objet_mobile_a91e8ee52ee08222b7b1ed0dfc6be1aa4}{setImg}}(\textcolor{stringliteral}{"{}:/images/Joueur/playerRight.png"{}});  \textcolor{comment}{//On affiche le personnage dans la direction du deplacement effectue}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00189}00189         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00190}00190 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00191}00191      \textcolor{comment}{//Supplements : raccourci des boutons via le clavier}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00192}00192      \textcolor{keywordflow}{case} Qt::Key\_R : this-\/>on\_bRecommencerNiv\_clicked();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00193}00193         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00194}00194      \textcolor{keywordflow}{case} Qt::Key\_O : this-\/>on\_bOptions\_clicked();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00195}00195         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00196}00196      \textcolor{keywordflow}{case} Qt::Key\_A : this-\/>on\_bAide\_clicked();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00197}00197         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00198}00198      \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00199}00199 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00200}00200      \textcolor{keywordtype}{bool} finNiv = part-\/>\mbox{\hyperlink{class_partie_ae5ad458eba59235d21bfdbae404bc532}{victoire}}();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00201}00201      this-\/>repaint();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00202}00202 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00203}00203      \textcolor{keywordflow}{if} (part-\/>\mbox{\hyperlink{class_partie_a213a0de842d8dbbdddb3c82097e62e47}{getNiv}}() == part-\/>\mbox{\hyperlink{class_partie_aa8f54b789266289006ee98a7db70269d}{getConfig}}()-\/>\mbox{\hyperlink{class_configuration_a2f5bbb664c430f89fe6f9b8db5c1a52f}{getNbNiv}}() \&\& finNiv) \textcolor{comment}{//Si le dernier niveau est termine, on affiche le message special}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00204}00204          this-\/>messageFinal();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00205}00205 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00206}00206      \textcolor{keywordflow}{if} (finNiv \&\& part-\/>\mbox{\hyperlink{class_partie_a213a0de842d8dbbdddb3c82097e62e47}{getNiv}}() != part-\/>\mbox{\hyperlink{class_partie_aa8f54b789266289006ee98a7db70269d}{getConfig}}()-\/>\mbox{\hyperlink{class_configuration_a2f5bbb664c430f89fe6f9b8db5c1a52f}{getNbNiv}}())  \textcolor{comment}{//Si un niveau quelconque est termine, on affiche le message de fin de niveau classique}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00207}00207          this-\/>messageVictoire();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00208}00208 \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00209}00209 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00213}00213 \textcolor{keywordtype}{void} MainWindow::messageVictoire()\{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00214}00214     msgBox.setWindowTitle(\textcolor{stringliteral}{"{}Bravo"{}});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00215}00215     msgBox.setText(\textcolor{stringliteral}{"{}Vous avez reussi le niveau "{}} + QString::number(part-\/>\mbox{\hyperlink{class_partie_a213a0de842d8dbbdddb3c82097e62e47}{getNiv}}()));}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00216}00216     msgBox.setButtonText(QMessageBox::Ok,\textcolor{stringliteral}{"{}Niveau suivant"{}});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00217}00217     msgBox.exec();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00218}00218 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00219}00219     part-\/>\mbox{\hyperlink{class_partie_a7b99af6588545b77fc14df88e5f55cbc}{lancerNiveau}}(part-\/>\mbox{\hyperlink{class_partie_a213a0de842d8dbbdddb3c82097e62e47}{getNiv}}()+1); \textcolor{comment}{//Suite au message, on lance le niveau suivant}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00220}00220 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00221}00221     this-\/>repaint();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00222}00222 \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00223}00223 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00227}00227 \textcolor{keywordtype}{void} MainWindow::messageFinal()\{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00228}00228     msgBox.setWindowTitle(\textcolor{stringliteral}{"{}Felicitations"{}});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00229}00229     msgBox.setText(\textcolor{stringliteral}{"{}Vous avez termine le dernier niveau !!!\(\backslash\)nToutes les caisses de l'entrepot sont rangees."{}});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00230}00230     msgBox.setButtonText(QMessageBox::Ok,\textcolor{stringliteral}{"{}Retour au menu"{}});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00231}00231     msgBox.exec();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00232}00232     menu = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00233}00233     this-\/>repaint();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00234}00234     this-\/>setFocus(Qt::MouseFocusReason); \textcolor{comment}{//Sur le menu, on focus les entrees sur la souris}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00235}00235 \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00236}00236 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00240}00240 \textcolor{keywordtype}{void} MainWindow::on\_bRecommencerNiv\_clicked()}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00241}00241 \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00242}00242     part-\/>\mbox{\hyperlink{class_partie_a345bac30b0b398333c2bde2ad218f1f6}{recommencerNiveau}}();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00243}00243     this-\/>repaint();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00244}00244     this-\/>setFocus(Qt::TabFocusReason);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00245}00245 \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00246}00246 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00250}00250 \textcolor{keywordtype}{void} MainWindow::on\_bMenu\_clicked()}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00251}00251 \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00252}00252     msgBox2.setWindowTitle(\textcolor{stringliteral}{"{}Retour au menu"{}});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00253}00253     msgBox2.setText(\textcolor{stringliteral}{"{}Cette action est irreversible !\(\backslash\)nToute progression sera perdue."{}});  \textcolor{comment}{//On affiche un message de prevention en cas de miss-\/click}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00254}00254     msgBox2.setIcon(QMessageBox::Warning);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00255}00255     msgBox2.setStandardButtons(QMessageBox::Yes);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00256}00256     msgBox2.setDefaultButton(QMessageBox::Yes);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00257}00257     msgBox2.addButton(QMessageBox::No);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00258}00258     msgBox2.setButtonText(QMessageBox::Yes,\textcolor{stringliteral}{"{}Continuer"{}});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00259}00259     msgBox2.setButtonText(QMessageBox::No,\textcolor{stringliteral}{"{}Annuler"{}});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00260}00260 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00261}00261     \textcolor{keywordflow}{if}(msgBox2.exec() == QMessageBox::Yes)\{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00262}00262         menu = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00263}00263         this-\/>repaint();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00264}00264     \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00265}00265     this-\/>setFocus(Qt::MouseFocusReason); \textcolor{comment}{//Sur le menu, on focus les entrees sur la souris}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00266}00266 \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00267}00267 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00271}00271 \textcolor{keywordtype}{void} MainWindow::on\_bOptions\_clicked()}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00272}00272 \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00273}00273     \mbox{\hyperlink{class_options_window}{OptionsWindow}} f(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00274}00274     f.exec();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00275}00275     \textcolor{keywordflow}{if} (f.getConfig()-\/>getNivAlancer() != -\/1) \textcolor{comment}{//Si le niveau a lancer de cette fenetre est different de -\/1, alors la fenetre principale doit lancer le niveau}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00276}00276     \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00277}00277         part-\/>\mbox{\hyperlink{class_partie_a7b99af6588545b77fc14df88e5f55cbc}{lancerNiveau}}(f.getConfig()-\/>getNivAlancer());}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00278}00278         menu = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00279}00279         f.close();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00280}00280     \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00281}00281     this-\/>repaint();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00282}00282     this-\/>setFocus(Qt::TabFocusReason);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00283}00283 \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00284}00284 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00288}00288 \textcolor{keywordtype}{void} MainWindow::on\_bJouer\_clicked()}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00289}00289 \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00290}00290     menu = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00291}00291     part-\/>\mbox{\hyperlink{class_partie_a7b99af6588545b77fc14df88e5f55cbc}{lancerNiveau}}(1);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00292}00292     this-\/>repaint();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00293}00293     this-\/>setFocus(Qt::TabFocusReason);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00294}00294 \}}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00295}00295 }
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00299}00299 \textcolor{keywordtype}{void} MainWindow::on\_bAide\_clicked()}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00300}00300 \{}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00301}00301     \mbox{\hyperlink{class_aide_window}{AideWindow}} f(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00302}00302     f.exec();}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00303}00303     this-\/>setFocus(Qt::TabFocusReason);}
+\DoxyCodeLine{\Hypertarget{mainwindow_8cpp_source_l00304}00304 \}}
+
+\end{DoxyCode}

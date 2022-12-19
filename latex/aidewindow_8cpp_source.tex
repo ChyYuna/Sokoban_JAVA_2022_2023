@@ -1,0 +1,49 @@
+\hypertarget{aidewindow_8cpp_source}{}\doxysection{aidewindow.\+cpp}
+\mbox{\hyperlink{aidewindow_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00001}00001 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{aidewindow_8h}{aidewindow.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00002}00002 \textcolor{preprocessor}{\#include "{}ui\_aidewindow.h"{}}}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00013}\mbox{\hyperlink{class_aide_window_a5bf9d050da0fbb84c24fb85ef74fe344}{00013}} \mbox{\hyperlink{class_aide_window_a5bf9d050da0fbb84c24fb85ef74fe344}{AideWindow::AideWindow}}(QWidget *parent) :}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00014}00014     QDialog(parent),}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00015}00015     ui(new Ui::\mbox{\hyperlink{class_aide_window}{AideWindow}})}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00016}00016 \{}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00017}00017     ui-\/>setupUi(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00018}00018     setWindowTitle(\textcolor{stringliteral}{"{}Comment jouer ?"{}});}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00019}00019     this-\/>setFixedSize(this-\/>size()); \textcolor{comment}{//fixe la taille de la fenetre definitivement}}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00020}00020 }
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00021}00021     \textcolor{comment}{//Configuration du bouton Retour}}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00022}00022     ui-\/>bRetour-\/>setStyleSheet(\textcolor{stringliteral}{"{}QPushButton\{font-\/size: 14px;font-\/family: Arial\}"{}});}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00023}00023     QIcon menu(\textcolor{stringliteral}{"{}:/images/Icones/retour.png"{}});}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00024}00024     ui-\/>bRetour-\/>setIcon(menu);}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00025}00025     ui-\/>bRetour-\/>setIconSize(QSize (15,15));}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00026}00026 }
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00027}00027     \textcolor{comment}{//GIF montrant comment jouer}}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00028}00028     QMovie *movie=\textcolor{keyword}{new} QMovie(\textcolor{stringliteral}{"{}:/images/aideJeu.gif"{}});}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00029}00029     \textcolor{comment}{// Play GIF}}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00030}00030     QLabel *label=\textcolor{keyword}{new} QLabel(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00031}00031     \textcolor{comment}{//label-\/>setGeometry(0,0,350,400);}}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00032}00032     label-\/>setMovie(movie);}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00033}00033     movie-\/>start();}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00034}00034 }
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00035}00035     this-\/>setFocus(Qt::MouseFocusReason);}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00036}00036 \}}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00041}\mbox{\hyperlink{class_aide_window_a54d7fcc59ee6febc5cc1214632d38474}{00041}} \mbox{\hyperlink{class_aide_window_a54d7fcc59ee6febc5cc1214632d38474}{AideWindow::\string~AideWindow}}()}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00042}00042 \{}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00043}00043     \textcolor{keyword}{delete} ui;}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00044}00044 \}}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00045}00045 }
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00050}00050 \textcolor{keywordtype}{void} AideWindow::paintEvent(QPaintEvent* e) \{}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00051}00051      QWidget::paintEvent(e);}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00052}00052      QPainter painter(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00053}00053 }
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00054}00054      painter.drawPixmap(425,240,120,70,QPixmap(\textcolor{stringliteral}{"{}:/images/fleches.png"{}}));}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00055}00055 \}}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00056}00056 }
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00060}00060 \textcolor{keywordtype}{void} AideWindow::on\_bRetour\_clicked()}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00061}00061 \{}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00062}00062     this-\/>close();}
+\DoxyCodeLine{\Hypertarget{aidewindow_8cpp_source_l00063}00063 \}}
+
+\end{DoxyCode}
