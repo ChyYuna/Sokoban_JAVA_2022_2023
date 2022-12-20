@@ -25,14 +25,23 @@ import javax.swing.ButtonGroup;
 
 // Comment: Try to resolve issue with background switching
 public class InputFrame extends JFrame {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private final Partie m_partie = new Partie();
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private int stateWindow = 0; //0-> menu 1-> Game
+	private JButton btnPlay = new JButton();
+	private JButton btnHelp= new JButton();
+	private JButton btnTools = new JButton();
+	private JButton btnHome = new JButton();
+	private JButton btnRetry = new JButton();
+	
+	
+	
+	
+	
+	//private JLabel back=new JLabel(background_menu);
+
 	/**
 	 * Launch the application.
 	 */
@@ -54,15 +63,22 @@ public class InputFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public InputFrame() {
+		
+		//adjust size+ add to Button ActionListener
+		sizingButton(); 
+	    ActionListenerButton();
 
-		//import image button for Menu window
-	    ImageIcon background_menu=new ImageIcon("menu.png");
-		ImageIcon icon_play = new ImageIcon("Play_Button.png");
-		ImageIcon icon_help = new ImageIcon("Help_button.png");
+	}
+
+	private void sizingButton() {
+		ImageIcon background_menu=new ImageIcon("menu.png");
+	    ImageIcon icon_play = new ImageIcon("Play_Button.png");
+	    ImageIcon icon_help = new ImageIcon("Help_button.png");
 		ImageIcon icon_tools = new ImageIcon("Tools_Button.png");
 		ImageIcon icon_retry = new ImageIcon("Tools_Button.png"); // à créer comme bouton
 		ImageIcon icon_menu = new ImageIcon("Tools_Button.png"); // à créer comme bouton
 		ImageIcon background_game = new ImageIcon("background.png");
+		//set size button
 		icon_play = ResizeButton(icon_play,153,62);
 		icon_help = ResizeButton(icon_help,153,62);
 		icon_tools = ResizeButton(icon_tools,153,62);
@@ -80,104 +96,77 @@ public class InputFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnPlay = new JButton(icon_play);
+		
+		btnPlay = new JButton(icon_play);
 		buttonGroup.add(btnPlay);
 		btnPlay.setBounds(468, 300, 153, 62);
 		contentPane.add(btnPlay);
 		
 		//Help
-		JButton btnHelp= new JButton(icon_help);
+		btnHelp= new JButton(icon_help);
 		btnHelp.setBounds(889, 300, 153, 62);
 		btnHelp.setContentAreaFilled(false);
 		btnHelp.setBorderPainted(false);
 		contentPane.add(btnHelp);
 
 		//Tools
-		JButton btnConfigure = new JButton(icon_tools);
-		btnConfigure.setBounds(889, 228, 153, 62);
-		contentPane.add(btnConfigure);
+		btnTools = new JButton(icon_tools);
+		btnTools.setBounds(889, 228, 153, 62);
+		contentPane.add(btnTools);
 		
 		//home
-		JButton btnHome = new JButton(icon_menu);
+		btnHome = new JButton(icon_menu);
 		btnHome.setBounds(889, 156, 153, 62);
 		contentPane.add(btnHome);
 		
 		//Retry
-		JButton btnRetry = new JButton(icon_retry);
+		btnRetry = new JButton(icon_retry);
 		btnRetry.setBounds(889, 84, 153, 62);
 		contentPane.add(btnRetry);
 		
 		
 		//background home
-		JLabel back=new JLabel(background_menu);
-		//back.setLayout(null);
-		back.setBounds(0,0,1074,446); 
-		contentPane.add(back);
-		//event button gestionnary
-		class Listener extends JPanel implements ActionListener {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			public void actionPerformed(ActionEvent event) {
-				ImageIcon background_game = new ImageIcon("background.png");
-				background_game = ResizeGround(background_game, 1074,446);
-				JLabel back_game=new JLabel(background_game);
-				//back.setLayout(null);
-				back_game.setBounds(0,0,1074,446); 
-				if (event.getSource() == btnHelp) {
-					JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
-	                JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
-
-				} else if (event.getSource() == btnPlay) {
-					
-					JFrame newframe = new JFrame("JOptionPane Play UwU example");
-	                JOptionPane.showMessageDialog(newframe,"UwU");
-	                contentPane.remove(back);
-	                contentPane.add(back_game);
-	                btnPlay.setVisible(false);
-	                m_partie.lancerNiveau(1);       
-	                int largeur = m_partie.getPlateau().getLargeur();
-	                int longueur = m_partie.getPlateau().getLongueur();
-	                for (int i=0; i<longueur; i++) {
-	                	for(int j=0; i<largeur;j++) {
-	                		char type = m_partie.getPlateauElt(i,j); //out of bond index 7 (pb)
-	                		System.out.print(type);	                		
-	                	}
-	                }
-	         
-	                
-				} else if (event.getSource()== btnHome){
-					contentPane.remove(back_game);
-					contentPane.add(back);
-					btnPlay.setVisible(true);
-				}
-		       contentPane.repaint();
-			}
-		}
+		//back.setBounds(0,0,1074,446); 
+		//contentPane.add(back);
+	}
 	
-		
+	private void ActionListenerButton() {
+		btnHelp.addActionListener(this:: btnPushHelpListener);
+		btnTools.addActionListener(this::btnPushToolsListener);
+		btnHome.addActionListener(this::btnPushHomeListener);
 		//set Cursor
 		btnPlay.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnHelp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnConfigure.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnTools.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRetry.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
-		//action with buttons 
-		btnHelp.addActionListener(new Listener());
-		btnPlay.addActionListener(new Listener());
-		btnHome.addActionListener(new Listener());
 	}
-
 	
+private void btnPushHelpListener(ActionEvent event) {
+		JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
+        JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
+	}
+	
+	private void btnPushToolsListener(ActionEvent event) {
+		JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
+        JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
+	}
+	
+	private void btnPushHomeListener(ActionEvent event) {
+		//Supprimer la fenetre jeu quand on clique dessus
+	}
+	
+	private void btnPushPlayListener(ActionEvent event) {
+		JFrame newframe = new JFrame("JOptionPane Play UwU example");
+		//Afficher le plateau, avec ses élements graphiques
+	}
+		
 	public ImageIcon ResizeButton(ImageIcon icon, int w, int h) {
 		Image image = icon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(w, h,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		return new ImageIcon(newimg);  // transform it back
 	}
-	
 	
 	public ImageIcon ResizeGround(ImageIcon img, int w, int h) {
 		Image image = img.getImage(); // transform it 
@@ -186,7 +175,3 @@ public class InputFrame extends JFrame {
 	}
 	
 }
-//
-//Image image = icon_play.getImage(); // transform it 
-//Image newimg = image.getScaledInstance(153, 62,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-//icon_play = new ImageIcon(newimg);  // transform it back
