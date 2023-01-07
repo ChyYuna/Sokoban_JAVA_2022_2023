@@ -55,6 +55,11 @@ public abstract class ObjetMobile extends Objet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 		}
+		img = ResizeImg(img, 50,50);
 
+	}
+	private Image ResizeImg(Image img, int w, int h) {
+		Image newimg = img.getScaledInstance(w, h,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		return newimg;  // transform it back
 	}
 }

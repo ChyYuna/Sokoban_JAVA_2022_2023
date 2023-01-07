@@ -27,7 +27,7 @@ public class Partie {
 	 * @param niv : entier contenant le numero du niveau a lancer
 	 */
 	public void lancerNiveau(int niv) {
-		File fichier = new File(String.valueOf(1)+".txt");// niv àà la place du 2
+		File fichier = new File(String.valueOf(niv)+".txt");// niv àà la place du 2
 	    
 	    int k=0; // L'entier k permet de numeroter les caisses et de les manipuler dans le tableau les contenant
 
@@ -47,7 +47,8 @@ public class Partie {
 	            for (int j=0; j<m_plat.getLongueur(); j++){
 	                if (m_plat.getTab()[i][j].getType() == '@' || m_plat.getTab()[i][j].getType() == '+') {
 	                    m_perso.setX(j);
-	                    m_perso.setY(i);	
+	                    m_perso.setY(i);
+	                    
 	                    m_perso.setImg("Joueur/playerDown.png");
 	                }
 	                if (m_plat.getTab()[i][j].getType() == '$'){
