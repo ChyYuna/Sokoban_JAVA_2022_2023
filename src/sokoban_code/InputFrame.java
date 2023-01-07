@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.ButtonGroup;
@@ -31,6 +32,7 @@ public class InputFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private final Partie m_partie = new Partie();
 	private JPanel contentPane;
+	private GraphicPlateau GameContentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private int stateWindow = 0; //0-> menu 1-> Game
 	/**
@@ -54,6 +56,16 @@ public class InputFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public InputFrame() {
+<<<<<<< Updated upstream
+=======
+		
+		//adjust size+ add to Button ActionListener
+		sizingButton(); 
+	    ActionListenerButton();
+        revalidate();
+        repaint();
+	}
+>>>>>>> Stashed changes
 
 		//import image button for Menu window
 	    ImageIcon background_menu=new ImageIcon("menu.png");
@@ -77,10 +89,15 @@ public class InputFrame extends JFrame {
 		setBounds(0, 0, 1088, 483);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
+<<<<<<< Updated upstream
 		
 		JButton btnPlay = new JButton(icon_play);
+=======
+		setContentPane(contentPane);
+		
+		btnPlay = new JButton(icon_play);
+>>>>>>> Stashed changes
 		buttonGroup.add(btnPlay);
 		btnPlay.setBounds(468, 300, 153, 62);
 		contentPane.add(btnPlay);
@@ -157,7 +174,15 @@ public class InputFrame extends JFrame {
 			}
 		}
 	
+<<<<<<< Updated upstream
 		
+=======
+	private void ActionListenerButton() {
+		btnHelp.addActionListener(this:: btnPushHelpListener);
+		btnTools.addActionListener(this::btnPushToolsListener);
+		btnHome.addActionListener(this::btnPushHomeListener);
+		btnPlay.addActionListener(this::btnPushPlayListener);
+>>>>>>> Stashed changes
 		//set Cursor
 		btnPlay.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnHelp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -172,6 +197,34 @@ public class InputFrame extends JFrame {
 	}
 
 	
+<<<<<<< Updated upstream
+=======
+	private void btnPushHelpListener(ActionEvent event) {
+		JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
+        JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
+	}
+	
+	private void btnPushToolsListener(ActionEvent event) {
+		JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
+        JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
+	}
+	
+	private void btnPushHomeListener(ActionEvent event) {
+		//Supprimer la fenetre jeu quand on clique dessus
+	}
+	
+	private void btnPushPlayListener(ActionEvent event) {
+		m_partie.lancerNiveau(1);
+		contentPane.setVisible(false);
+		GameContentPane = new GraphicPlateau(m_partie);
+		setContentPane(GameContentPane);
+		repaint();
+		
+
+		//Afficher le plateau, avec ses élements graphiques
+	}
+		
+>>>>>>> Stashed changes
 	public ImageIcon ResizeButton(ImageIcon icon, int w, int h) {
 		Image image = icon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(w, h,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
