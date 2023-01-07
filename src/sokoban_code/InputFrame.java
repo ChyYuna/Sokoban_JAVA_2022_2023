@@ -30,6 +30,8 @@ public class InputFrame extends JFrame {
 	private final Partie m_partie = new Partie();
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private GraphicPlateau GameContentPane;
+
 	private JButton btnPlay = new JButton();
 	private JButton btnHelp= new JButton();
 	private JButton btnTools = new JButton();
@@ -134,6 +136,7 @@ public class InputFrame extends JFrame {
 		btnHelp.addActionListener(this:: btnPushHelpListener);
 		btnTools.addActionListener(this::btnPushToolsListener);
 		btnHome.addActionListener(this::btnPushHomeListener);
+		btnPlay.addActionListener(this::btnPushPlayListener);
 		//set Cursor
 		btnPlay.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnHelp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -158,8 +161,12 @@ private void btnPushHelpListener(ActionEvent event) {
 	}
 	
 	private void btnPushPlayListener(ActionEvent event) {
-		JFrame newframe = new JFrame("JOptionPane Play UwU example");
-		//Afficher le plateau, avec ses élements graphiques
+		m_partie.lancerNiveau(1);
+		contentPane.setVisible(false);
+		GameContentPane = new GraphicPlateau(m_partie);
+		setContentPane(GameContentPane);
+		repaint();
+
 	}
 		
 	public ImageIcon ResizeButton(ImageIcon icon, int w, int h) {
