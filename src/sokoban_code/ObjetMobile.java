@@ -55,7 +55,7 @@ public abstract class ObjetMobile extends Objet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 		}
-		img = ResizeImg(img, 50,50);
+		img = ResizeImg(img, 40,40);
 
 	}
 	private Image ResizeImg(Image img, int w, int h) {

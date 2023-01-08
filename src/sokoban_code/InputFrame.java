@@ -16,6 +16,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -24,21 +26,20 @@ import javax.swing.ButtonGroup;
 
 
 // Comment: Try to resolve issue with background switching
-public class InputFrame extends JFrame {
+public class InputFrame extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	private final Partie m_partie = new Partie();
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private GraphicPlateau GameContentPane;
-
 	private JButton btnPlay = new JButton();
 	private JButton btnHelp= new JButton();
 	private JButton btnTools = new JButton();
 	private JButton btnHome = new JButton();
 	private JButton btnRetry = new JButton();
-	
-	
+	private MyKeyEvent inputHandler;
+
 	
 	
 	
@@ -163,11 +164,13 @@ private void btnPushHelpListener(ActionEvent event) {
 	private void btnPushPlayListener(ActionEvent event) {
 		m_partie.lancerNiveau(1);
 		contentPane.setVisible(false);
-		GameContentPane = new GraphicPlateau(m_partie);
+		GameContentPane = new GraphicPlateau(m_partie,String.valueOf(1));
 		setContentPane(GameContentPane);
+		this.inputHandler = new MyKeyEvent(m_partie);
+		addKeyListener(this.inputHandler);
 		repaint();
 
-	}
+		}
 		
 	public ImageIcon ResizeButton(ImageIcon icon, int w, int h) {
 		Image image = icon.getImage(); // transform it 
@@ -180,5 +183,7 @@ private void btnPushHelpListener(ActionEvent event) {
 		Image newimg = image.getScaledInstance(w, h,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		return new ImageIcon(newimg);  // transform it back
 	}
+
+
 	
 }
