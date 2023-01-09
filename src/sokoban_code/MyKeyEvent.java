@@ -10,6 +10,11 @@ public class MyKeyEvent extends KeyAdapter{
 	public MyKeyEvent(Partie m_partie) {
 		partie_aff = m_partie;
 	}
+	
+	public void setMyKeyEvent(Partie m_partie) {
+		partie_aff = m_partie;
+
+	}
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int numCaisse;

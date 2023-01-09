@@ -5,21 +5,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Image;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+
 import java.awt.event.ActionEvent;
-import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.ButtonGroup;
 
@@ -38,7 +31,7 @@ public class InputFrame extends JFrame{
 	private JButton btnTools = new JButton();
 	private JButton btnHome = new JButton();
 	private JButton btnRetry = new JButton();
-	private MyKeyEvent inputHandler;
+	private MyKeyEvent inputHandler = new MyKeyEvent(new Partie());
 
 	
 	
@@ -165,9 +158,11 @@ private void btnPushHelpListener(ActionEvent event) {
 		m_partie.lancerNiveau(1);
 		contentPane.setVisible(false);
 		GameContentPane = new GraphicPlateau(m_partie,String.valueOf(1));
-		setContentPane(GameContentPane);
-		this.inputHandler = new MyKeyEvent(m_partie);
-		addKeyListener(this.inputHandler);
+		inputHandler = new MyKeyEvent(m_partie);;
+		setContentPane(GameContentPane);		
+		GameContentPane.setFocusable(true);
+		GameContentPane.requestFocusInWindow();
+		GameContentPane.addKeyListener(inputHandler);
 		repaint();
 
 		}
