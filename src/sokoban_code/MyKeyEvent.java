@@ -20,7 +20,7 @@ public class MyKeyEvent extends KeyAdapter{
 		int numCaisse;
 		int x_perso = partie_aff.getPerso().getX();
 		int y_perso = partie_aff.getPerso().getY();
-		
+		System.out.println("Perso : " + String.valueOf(x_perso) + " " + String.valueOf(y_perso));
 		// Récupération de la touche appuyée
 	    int keyCode = e.getKeyCode();
 	    System.out.println(keyCode);
@@ -69,7 +69,22 @@ public class MyKeyEvent extends KeyAdapter{
 	    	}
 	    	partie_aff.getPerso().setImg("Joueur/playerRight.png");
 	    }
-	  }
+	    
+	    //test : on cherche à verifier que la caisse et la marque sont sur le même plan
+	    /**
+	    System.out.println("(MKE) Caisse0 X = " + String.valueOf(partie_aff.getCaisses()[0].getX()) + " Y = " + String.valueOf(partie_aff.getCaisses()[0].getY()));
+	    for (int x=0; x<partie_aff.getPlateau().getLargeur();x++) {
+			for(int y=0; y<partie_aff.getPlateau().getLongueur(); y++) {
+			    if (partie_aff.getPlateauElt(x,y) == '.') {
+					System.out.println("Marque: X = " + String.valueOf(x) + " Y =" + String.valueOf(y));
+			    }
+			}
+	    }
+	    //fin de la paranthèse
+	     
+	     */
+	}
+		
 
 
 	@Override

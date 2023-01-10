@@ -49,23 +49,16 @@ public class Plateau extends Objet{
 	 */
 	public Plateau(int x, int y, Scanner scanner){
 	super(x,y); 
-		//Scanner scanner = new Scanner(fichier);
-		
-		m_largeur = scanner.nextInt();
+		//DrawImage(i,j) -> i = deplacement vers la droite || j = déplacement vers le bas
+		// donc ici, i in [0 : m_largeur-1] || j in [0 : m_longeur-1]
+		// Mais la lecture du fichier se fait par "longueur" ,donc on doit parcourir ainsi
 		m_longueur = scanner.nextInt();
-	    tab = new ObjetImmobile[m_longueur][m_largeur];
-		for (int i=0; i<m_largeur; i++){
+		m_largeur = scanner.nextInt();
+	    tab = new ObjetImmobile[m_largeur][m_longueur];
+		for (int i=0; i<m_longueur; i++){
 			String line_type = scanner.next();
-			for (int j=0; j<m_longueur; j++){
-				tab[i][j] = new ObjetImmobile(i,j,line_type.charAt(j));
-			}
-			//System.out.println(line_type);
-		}
-		//test
-		for (int i=0; i<m_largeur; i++){
-			System.out.println("");
-			for (int j=0; j<m_longueur; j++){
-				System.out.print(tab[i][j].getType());
+			for (int j=0; j<m_largeur; j++){
+				tab[j][i] = new ObjetImmobile(j,i,line_type.charAt(j)); // x , y, comme sur un plan (ne pas penser matriciellement) 
 			}
 			//System.out.println(line_type);
 		}

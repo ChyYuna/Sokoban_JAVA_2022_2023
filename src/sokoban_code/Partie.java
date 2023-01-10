@@ -41,23 +41,22 @@ public class Partie {
 	    	m_perso = new Personnage();
 	        m_c = new Caisse[m_nbCaisses]; // En lancant un nouveau niveau, la liste m_c (contentant les caisses) doit etre construite en fonction du nombre de caisse m_nbCaisses du niveau
 	        for (int i=0; i<m_nbCaisses; i++)
-	             m_c[i] = new Caisse(); // Ne fonctionne pas: Aucune caisse est repérée
-	        for (int i=0; i<m_plat.getLargeur(); i++){
-	        	System.out.println("");
-	            for (int j=0; j<m_plat.getLongueur(); j++){
-	                if (m_plat.getTab()[i][j].getType() == '@' || m_plat.getTab()[i][j].getType() == '+') {
+	             m_c[i] = new Caisse();
+	        for (int i=0; i<m_plat.getLongueur(); i++){
+	            for (int j=0; j<m_plat.getLargeur(); j++){
+	                if (m_plat.getTab()[j][i].getType() == '@' || m_plat.getTab()[j][i].getType() == '+') {
 	                    m_perso.setX(j);
 	                    m_perso.setY(i);
 	                    
 	                    m_perso.setImg("Joueur/playerDown.png");
 	                }
-	                if (m_plat.getTab()[i][j].getType() == '$'){
+	                if (m_plat.getTab()[j][i].getType() == '$'){
 	                    m_c[k].setX(j);
 	                    m_c[k].setY(i);
 	                    m_c[k].setImg("Caisse/caisse.png");
 	                    k++;
 	                }
-	                if (m_plat.getTab()[i][j].getType() == '*'){
+	                if (m_plat.getTab()[j][i].getType() == '*'){
 	                    m_c[k].setX(j);
 	                    m_c[k].setY(i);
 	                    m_c[k].setImg("Caisse/caisseSurCible.png");
@@ -144,7 +143,10 @@ public class Partie {
 	 * @return True si la case visee est vide et False sinon
 	 */
 	public boolean estVide(int x, int y) {
-	    return (m_plat.getTab()[y][x].getType() != '#' && estCaisse(x,y)==-1);
+		System.out.println("Dans EstVide, j'appelle x = " + String.valueOf(x) + " y = " + String.valueOf(y));
+		System.out.println("Dans m_plateau, getTab()[x= " + String.valueOf(x) + "][y= " + String.valueOf(y) + "] a pour coordonnées X = "
+				+String.valueOf(m_plat.getTab()[x][y].getX()) + " Y = " + String.valueOf(m_plat.getTab()[x][y].getY()));
+	    return (m_plat.getTab()[x][y].getType() != '#' && estCaisse(x,y)==-1);
 	}
 	
 	/**
@@ -153,13 +155,13 @@ public class Partie {
 	 * @return True si la caisse est sur une cible et False sinon
 	 */
 	public boolean caisseSurCible(Caisse c){
-	    char type = m_plat.getTab()[c.getY()][c.getX()].getType();
+	    char type = m_plat.getTab()[c.getX()][c.getY()].getType();
 	    if(type=='.' || type=='+' || type=='*'){
-	    	c.setImg(":/images/Caisse/caisseSurCible.png");
+	    	c.setImg("Caisse/caisseSurCible.png");
 	        return true;
 	     }
 	     else {
-	    	c.setImg(":/images/Caisse/caisse.png");
+	    	c.setImg("Caisse/caisse.png");
 	        return false;
 	    }
 	}

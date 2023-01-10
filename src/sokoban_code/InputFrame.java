@@ -1,9 +1,12 @@
 package sokoban_code;
 
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JOptionPane;
 import java.awt.Cursor;
@@ -32,7 +35,7 @@ public class InputFrame extends JFrame{
 	private JButton btnHome = new JButton();
 	private JButton btnRetry = new JButton();
 	private MyKeyEvent inputHandler = new MyKeyEvent(new Partie());
-
+	private int stage = 1;
 	
 	
 	
@@ -151,21 +154,27 @@ private void btnPushHelpListener(ActionEvent event) {
 	}
 	
 	private void btnPushHomeListener(ActionEvent event) {
-		//Supprimer la fenetre jeu quand on clique dessus
 	}
 	
-	private void btnPushPlayListener(ActionEvent event) {
-		m_partie.lancerNiveau(1);
+	private void btnPushPlayListener(ActionEvent level) {
+		m_partie.lancerNiveau(stage);
 		contentPane.setVisible(false);
-		GameContentPane = new GraphicPlateau(m_partie,String.valueOf(1));
+		//frame for level
+		GameContentPane = new GraphicPlateau(m_partie,String.valueOf(stage));
+		//key for the game
 		inputHandler = new MyKeyEvent(m_partie);;
 		setContentPane(GameContentPane);		
 		GameContentPane.setFocusable(true);
 		GameContentPane.requestFocusInWindow();
 		GameContentPane.addKeyListener(inputHandler);
-		repaint();
-
+		if (GameContentPane.isFinNiv()){
+			System.out.println("Information recue");
+			stage++;
 		}
+	    repaint();
+
+	}
+
 		
 	public ImageIcon ResizeButton(ImageIcon icon, int w, int h) {
 		Image image = icon.getImage(); // transform it 
@@ -178,7 +187,4 @@ private void btnPushHelpListener(ActionEvent event) {
 		Image newimg = image.getScaledInstance(w, h,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		return new ImageIcon(newimg);  // transform it back
 	}
-
-
-	
 }
