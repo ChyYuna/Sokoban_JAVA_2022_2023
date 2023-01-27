@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JOptionPane;
 import java.awt.Cursor;
@@ -36,8 +37,8 @@ public class InputFrame extends JFrame{
 	private JButton btnRetry = new JButton();
 	private MyKeyEvent inputHandler = new MyKeyEvent(new Partie());
 	private int stage = 1;
-	
-	
+	public static Thread GameThread;
+	public boolean lancerPartie = false;
 	
 	//private JLabel back=new JLabel(background_menu);
 
@@ -45,15 +46,16 @@ public class InputFrame extends JFrame{
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		InputFrame frame = new InputFrame();
+		frame.StartThread();
+		frame.setPreferredSize(new Dimension(483, 1088)); //1310,483
+		frame.setVisible(true);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					InputFrame frame = new InputFrame();
-					frame.setPreferredSize(new Dimension(483, 1088)); //1310,483
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				System.out.println("Test");
+//				while(GameThread!=null) {
+					
+//				}
 			}
 		});
 	}
@@ -68,7 +70,10 @@ public class InputFrame extends JFrame{
 	    ActionListenerButton();
 
 	}
-
+	public void StartThread() {
+		GameThread = new Thread();
+		GameThread.start();
+	}
 	private void sizingButton() {
 		ImageIcon background_menu=new ImageIcon("menu.png");
 	    ImageIcon icon_play = new ImageIcon("Play_Button.png");
@@ -156,7 +161,39 @@ private void btnPushHelpListener(ActionEvent event) {
 	private void btnPushHomeListener(ActionEvent event) {
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private void btnPushPlayListener(ActionEvent level) {
+		lancerPartie = true;
+		new SwingWorker() {
+			protected Object doInBackground() throws Exception {
+				// TODO Auto-generated method stub
+				while(lancerPartie==true) {
+					m_partie.lancerNiveau(stage);
+					contentPane.setVisible(false);
+					//frame for level
+					GameContentPane = new GraphicPlateau(m_partie,String.valueOf(stage));
+					//key for the game
+					inputHandler = new MyKeyEvent(m_partie);
+					setContentPane(GameContentPane);		
+					GameContentPane.setFocusable(true);
+					GameContentPane.requestFocusInWindow();
+					GameContentPane.addKeyListener(inputHandler);
+					while(!GameContentPane.isFinNiv()){
+						System.out.println("Information recue");
+					}
+					//JFrame NiveauReussi = new JFrame();
+					stage++;
+					//repaint();
+
+					
+					
+				}
+				return null;
+			}
+		}.execute();
+		//repaint();
+		
+		/**
 		m_partie.lancerNiveau(stage);
 		contentPane.setVisible(false);
 		//frame for level
@@ -167,12 +204,21 @@ private void btnPushHelpListener(ActionEvent event) {
 		GameContentPane.setFocusable(true);
 		GameContentPane.requestFocusInWindow();
 		GameContentPane.addKeyListener(inputHandler);
-		if (GameContentPane.isFinNiv()){
-			System.out.println("Information recue");
-			stage++;
-		}
+		
+		new SwingWorker() {
+			@Override
+			protected Object doInBackground() throws Exception {
+				// TODO Auto-generated method stub
+				while(true) {
+				while(!GameContentPane.isFinNiv()){
+					System.out.println("Information recue");
+					stage++;
+				}
+				return null;
+			}
+		}.execute();
 	    repaint();
-
+		*/
 	}
 
 		
