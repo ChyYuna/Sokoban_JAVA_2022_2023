@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.sql.*;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
@@ -37,10 +38,34 @@ public class InputFrame extends JFrame{
 	private JButton btnRetry = new JButton();
 	private MyKeyEvent inputHandler = new MyKeyEvent(new Partie());
 	private int stage = 1;
+	private String name;
+	private int highscore = 0;
 	public static Thread GameThread;
 	public boolean lancerPartie = false;
 	
 	//private JLabel back=new JLabel(background_menu);
+	public Connection conn;	
+	
+	public Connection connection(){
+		Connection conn = null;	
+		try {
+			//Class.forName("org.sqlite.JDBC");
+			conn = DriverManager.getConnection("jdbc:sqlite:Sokoban.sqlite");
+			System.out.println("Opened database successfully");
+		}
+		catch (SQLException ex) {
+	        ex.printStackTrace();
+	    }
+		return conn;
+	}
+	
+	public void LectureBBD() throws SQLException{
+		conn = connection();
+		ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score");
+		System.out.println("Opened database successfully");
+		while(r.next()) {System.out.println(r.getString("Nom"));}
+		conn.close();
+	}
 
 	/**
 	 * Launch the application.
@@ -159,10 +184,14 @@ private void btnPushHelpListener(ActionEvent event) {
 	}
 	
 	private void btnPushHomeListener(ActionEvent event) {
+		name = JOptionPane.showInputDialog("Pour enregistrer votre score, veuillez entrer votre nom (unknow par defaut)");
+        if (name.isEmpty()) {name = "Unknow";}
+
 	}
 	
 	@SuppressWarnings("rawtypes")
 	private void btnPushPlayListener(ActionEvent level) {
+		btnPushHomeListener(level);
 		lancerPartie = true;
 		new SwingWorker() {
 			protected Object doInBackground() throws Exception {
@@ -182,6 +211,7 @@ private void btnPushHelpListener(ActionEvent event) {
 						System.out.println("Information recue");
 					}
 					//JFrame NiveauReussi = new JFrame();
+					highscore += 10*stage; 
 					stage++;
 					//repaint();
 
