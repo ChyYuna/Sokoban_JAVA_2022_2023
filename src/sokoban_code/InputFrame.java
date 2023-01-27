@@ -3,10 +3,15 @@ package sokoban_code;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.sql.*;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JDialog;
 import javax.swing.table.*;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
@@ -61,13 +66,13 @@ public class InputFrame extends JFrame{
 		return conn;
 	}
 	
-	public ResultSet LectureBBD() throws SQLException{
+	/*public ResultSet LectureBBD() throws SQLException{
 		conn = connection();
 		ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score");
 		while(r.next()) {System.out.println(r.getString("Nom"));}
 		conn.close();
 		return r;
-	}
+	}*/
 
 	/**
 	 * Launch the application.
@@ -172,7 +177,7 @@ public class InputFrame extends JFrame{
 		btnTools.addActionListener(this::btnPushToolsListener);
 		btnHome.addActionListener(this::btnPushHomeListener);
 		btnPlay.addActionListener(this::btnPushPlayListener);
-		//btnScore.addActionListener(this::btnPushScoreListener);
+		btnScore.addActionListener(this::btnPushScoreListener);
 		//set Cursor
 		btnScore.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnPlay.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -183,20 +188,38 @@ public class InputFrame extends JFrame{
 		
 	}
 	
-	/*private void btnPushScoreListener(ActionEvent event) {
+	private void btnPushScoreListener(ActionEvent event) {
 		try {
-			JFrame frame = new JFrame("Tableau des scores");
-	        JTable table = new JTable();
+			JDialog DDB = new JDialog();
+			DDB.setTitle("Table des scores");
+			
 			conn = connection();
 			ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score");
-			while(r.next()) {System.out.println(r.getString("Nom"));}
-			ResultSetTableModel model = new ResultSetTableModel(r);
+			String[] columnNames = {"Nom", "Highscore"};
+			
+			DefaultTableModel model = new DefaultTableModel(columnNames, 10);
+			while(r.next()) {
+				String n = r.getString("Nom");
+				int s = r.getInt("Highscore");
+				model.insertRow(0,new Object[]{n,s});
+			}
+			
+			JTable table = new JTable(model);
+			table.setEnabled(false);
+			JScrollPane scroll = new JScrollPane(table);
+			DDB.add(scroll);
+
+			DDB.setSize(400,300);
+			DDB.setModal(true);
+			DDB.setVisible(true);
+			
+			conn.close();
 			
 	    } catch (SQLException ex) {
 	        ex.printStackTrace();
 	    }
 		
-	}*/
+	}
 	
 	private void btnPushHelpListener(ActionEvent event) {
 		JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
@@ -204,13 +227,8 @@ public class InputFrame extends JFrame{
 	}
 	
 	private void btnPushToolsListener(ActionEvent event) {
-		try {
-			JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
-			JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
-			this.LectureBBD();
-	    } catch (SQLException ex) {
-	        ex.printStackTrace();
-	    }
+		JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
+		JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
 	}
 	
 	private void btnPushHomeListener(ActionEvent event) {
