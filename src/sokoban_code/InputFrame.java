@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.sql.*;
+import javax.swing.table.*;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
@@ -32,6 +33,7 @@ public class InputFrame extends JFrame{
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private GraphicPlateau GameContentPane;
 	private JButton btnPlay = new JButton();
+	private JButton btnScore = new JButton();
 	private JButton btnHelp= new JButton();
 	private JButton btnTools = new JButton();
 	private JButton btnHome = new JButton();
@@ -59,12 +61,12 @@ public class InputFrame extends JFrame{
 		return conn;
 	}
 	
-	public void LectureBBD() throws SQLException{
+	public ResultSet LectureBBD() throws SQLException{
 		conn = connection();
 		ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score");
-		System.out.println("Opened database successfully");
 		while(r.next()) {System.out.println(r.getString("Nom"));}
 		conn.close();
+		return r;
 	}
 
 	/**
@@ -77,7 +79,7 @@ public class InputFrame extends JFrame{
 		frame.setVisible(true);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				System.out.println("Test");
+				//System.out.println("Test");
 //				while(GameThread!=null) {
 					
 //				}
@@ -125,6 +127,10 @@ public class InputFrame extends JFrame{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		btnScore = new JButton(icon_play);
+		buttonGroup.add(btnScore);
+		btnScore.setBounds(889, 84, 153, 62);
+		contentPane.add(btnScore);
 		
 		btnPlay = new JButton(icon_play);
 		buttonGroup.add(btnPlay);
@@ -134,8 +140,6 @@ public class InputFrame extends JFrame{
 		//Help
 		btnHelp= new JButton(icon_help);
 		btnHelp.setBounds(889, 300, 153, 62);
-		btnHelp.setContentAreaFilled(false);
-		btnHelp.setBorderPainted(false);
 		contentPane.add(btnHelp);
 
 		//Tools
@@ -151,6 +155,10 @@ public class InputFrame extends JFrame{
 		//Retry
 		btnRetry = new JButton(icon_retry);
 		btnRetry.setBounds(889, 84, 153, 62);
+		btnHelp.setContentAreaFilled(false);
+		btnHelp.setBorderPainted(false);
+		btnRetry.setVisible(false);	
+		btnRetry.setEnabled(false);
 		contentPane.add(btnRetry);
 		
 		
@@ -164,7 +172,9 @@ public class InputFrame extends JFrame{
 		btnTools.addActionListener(this::btnPushToolsListener);
 		btnHome.addActionListener(this::btnPushHomeListener);
 		btnPlay.addActionListener(this::btnPushPlayListener);
+		//btnScore.addActionListener(this::btnPushScoreListener);
 		//set Cursor
+		btnScore.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnPlay.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnHelp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTools.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -173,14 +183,34 @@ public class InputFrame extends JFrame{
 		
 	}
 	
-private void btnPushHelpListener(ActionEvent event) {
+	/*private void btnPushScoreListener(ActionEvent event) {
+		try {
+			JFrame frame = new JFrame("Tableau des scores");
+	        JTable table = new JTable();
+			conn = connection();
+			ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score");
+			while(r.next()) {System.out.println(r.getString("Nom"));}
+			ResultSetTableModel model = new ResultSetTableModel(r);
+			
+	    } catch (SQLException ex) {
+	        ex.printStackTrace();
+	    }
+		
+	}*/
+	
+	private void btnPushHelpListener(ActionEvent event) {
 		JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
         JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
 	}
 	
 	private void btnPushToolsListener(ActionEvent event) {
-		JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
-        JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
+		try {
+			JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
+			JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
+			this.LectureBBD();
+	    } catch (SQLException ex) {
+	        ex.printStackTrace();
+	    }
 	}
 	
 	private void btnPushHomeListener(ActionEvent event) {
@@ -191,7 +221,9 @@ private void btnPushHelpListener(ActionEvent event) {
 	
 	@SuppressWarnings("rawtypes")
 	private void btnPushPlayListener(ActionEvent level) {
-		btnPushHomeListener(level);
+		name = JOptionPane.showInputDialog("Pour enregistrer votre score, veuillez entrer votre nom (unknow par defaut)");
+        if (name.isEmpty()) {name = "Unknow";}
+        
 		lancerPartie = true;
 		new SwingWorker() {
 			protected Object doInBackground() throws Exception {
@@ -199,6 +231,7 @@ private void btnPushHelpListener(ActionEvent event) {
 				while(lancerPartie==true) {
 					m_partie.lancerNiveau(stage);
 					contentPane.setVisible(false);
+					
 					//frame for level
 					GameContentPane = new GraphicPlateau(m_partie,String.valueOf(stage));
 					//key for the game
@@ -209,19 +242,20 @@ private void btnPushHelpListener(ActionEvent event) {
 					GameContentPane.addKeyListener(inputHandler);
 					while(!GameContentPane.isFinNiv()){
 						System.out.println("Information recue");
+						btnRetry.setVisible(true);		
+						btnRetry.setEnabled(true);
 					}
 					//JFrame NiveauReussi = new JFrame();
 					highscore += 10*stage; 
-					stage++;
-					//repaint();
-
+					//stage++;
+					repaint();
+					revalidate();
 					
 					
 				}
 				return null;
 			}
 		}.execute();
-		//repaint();
 		
 		/**
 		m_partie.lancerNiveau(stage);
