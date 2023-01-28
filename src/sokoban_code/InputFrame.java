@@ -22,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.JDialog;
 import javax.swing.table.*;
 import javax.swing.JTextField;
+import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JOptionPane;
@@ -105,13 +106,13 @@ public class InputFrame extends JFrame{
 		frame.StartThread();
 		frame.setPreferredSize(new Dimension(483, 1088)); //1310,483
 		frame.setVisible(true);
-		EventQueue.invokeLater(new Runnable() {
+		/*EventQueue.invokeLater(new Runnable() {
 			public void run() {
 		        backgroundMusic = new MusicPlayer("sound/ambiance.wav");
 		        backgroundMusic.play();
 		        //soundEffect = new MusicPlayer("path_to_sound_effect.wav");
 			}
-		});
+		});*/
 	}
 
 	/**
@@ -169,7 +170,6 @@ public class InputFrame extends JFrame{
 		case "menu":
 			
 			btnPlay = new JButton(icon_play);
-			buttonGroup.add(btnPlay);
 			btnPlay.setBounds(468, 300, 153, 62);
 			cPane.add(btnPlay);
 			
@@ -183,11 +183,9 @@ public class InputFrame extends JFrame{
 			btnTools.setBounds(889, 228, 153, 62);
 			cPane.add(btnTools);
 			
-			//
+			//Score
 			btnScore = new JButton(icon_score);
 			btnScore.setBounds(889, 156, 153, 62);
-
-			buttonGroup.add(btnScore);
 			cPane.add(btnScore);
 			
 
@@ -195,7 +193,6 @@ public class InputFrame extends JFrame{
 
 			btnScore = new JButton(icon_score);
 			btnScore.setBounds(889, 156, 153, 62);
-			buttonGroup.add(btnScore);
 			cPane.add(btnScore);
 			
 			//home			
@@ -206,10 +203,7 @@ public class InputFrame extends JFrame{
 			btnHome = new JButton(icon_menu);
 			btnHome.setBounds(889, 228, 153, 62);
 			cPane.add(btnHome);
-
-			
 		}
-		
 	}
 
 	
@@ -257,16 +251,34 @@ public class InputFrame extends JFrame{
 			DDB.setVisible(true);
 			
 			conn.close();
+			GameContentPane.requestFocus();
 			
 	    } catch (SQLException ex) {
 	        ex.printStackTrace();
 	    }
-		
 	}
 	
 	private void btnPushHelpListener(ActionEvent event) {
-		JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
-        JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
+		JDialog Help = new JDialog();
+		Help.setTitle("Aide");
+		JLabel label = new JLabel();
+		ImageIcon icon = new ImageIcon("aide_Sokoban.png");
+		Image img = icon.getImage();
+		Image newImage = img.getScaledInstance(600, 400, Image.SCALE_SMOOTH);
+		ImageIcon newIcon = new ImageIcon(newImage);
+		label.setIcon(newIcon);
+		Help.add(label);
+		Help.setVisible(true);
+		Help.setSize(600,440);
+	
+		/*JButton okButton = new JButton("OK");
+		okButton.addActionListener(new ActionListener() {
+		  public void actionPerformed(ActionEvent e) {
+			  Help.dispose();
+		  }
+		});
+		Help.add(okButton);*/
+		
 	}
 	
 	private void btnPushToolsListener(ActionEvent event) {
@@ -277,8 +289,6 @@ public class InputFrame extends JFrame{
 	}
 	
 	private void btnPushHomeListener(ActionEvent event) {
-		name = JOptionPane.showInputDialog("Pour enregistrer votre score, veuillez entrer votre nom (unknow par defaut)");
-        if (name.isEmpty()) {name = "Unknow";}
         //TODO 
         if (GameContentPane != null) {
         	GameContentPane.setVisible(false);
@@ -342,7 +352,6 @@ public class InputFrame extends JFrame{
 						GameContentPane.setFocusable(false);
 						GameContentPane.removeKeyListener(inputHandler);
 						contentPane.remove(GameContentPane);
-						stage++;
 						repaint();
 						revalidate();
 						setEtatGame(0);
