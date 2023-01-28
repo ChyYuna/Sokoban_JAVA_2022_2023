@@ -90,14 +90,6 @@ public class InputFrame extends JFrame{
 	}
 	
 
-	/*public ResultSet LectureBBD() throws SQLException{
-		conn = connection();
-		ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score");
-		while(r.next()) {System.out.println(r.getString("Nom"));}
-		conn.close();
-		return r;
-	}*/
-
 	/**
 	 * Launch the application.
 	 */
@@ -106,13 +98,13 @@ public class InputFrame extends JFrame{
 		frame.StartThread();
 		frame.setPreferredSize(new Dimension(483, 1088)); //1310,483
 		frame.setVisible(true);
-		/*EventQueue.invokeLater(new Runnable() {
+		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 		        backgroundMusic = new MusicPlayer("sound/ambiance.wav");
 		        backgroundMusic.play();
 		        //soundEffect = new MusicPlayer("path_to_sound_effect.wav");
 			}
-		});*/
+		});
 	}
 
 	/**
@@ -166,43 +158,45 @@ public class InputFrame extends JFrame{
 		icon_retry = ResizeButton(icon_retry,153,64);
 		icon_menu = ResizeButton(icon_menu,153,64);
 		icon_score = ResizeButton(icon_score, 153, 64);
-		switch (mode) {
-		case "menu":
 			
-			btnPlay = new JButton(icon_play);
-			btnPlay.setBounds(468, 300, 153, 62);
-			cPane.add(btnPlay);
+		btnPlay = new JButton(icon_play);
+		btnPlay.setBounds(468, 300, 153, 62);
+		cPane.add(btnPlay);
 			
-			//Help
-			btnHelp= new JButton(icon_help);
-			btnHelp.setBounds(889, 300, 153, 62);
-			cPane.add(btnHelp);
-
-			//Tools
-			btnTools = new JButton(icon_tools);
-			btnTools.setBounds(889, 228, 153, 62);
-			cPane.add(btnTools);
+		btnHelp= new JButton(icon_help);
+		btnHelp.setBounds(889, 300, 153, 62);
+		cPane.add(btnHelp);
+		
+		btnTools = new JButton(icon_tools);
+		btnTools.setBounds(889, 228, 153, 62);
+		cPane.add(btnTools);
 			
-			//Score
-			btnScore = new JButton(icon_score);
-			btnScore.setBounds(889, 156, 153, 62);
-			cPane.add(btnScore);
+		btnScore = new JButton(icon_score);
+		btnScore.setBounds(889, 156, 153, 62);
+		cPane.add(btnScore);
+		
+		btnRetry = new JButton(icon_retry);
+		btnRetry.setBounds(889, 300, 153, 62);
+		cPane.add(btnRetry);
 			
-
-		case "partie":
-
-			btnScore = new JButton(icon_score);
-			btnScore.setBounds(889, 156, 153, 62);
-			cPane.add(btnScore);
-			
-			//home			
-			btnRetry = new JButton(icon_retry);
-			btnRetry.setBounds(889, 300, 153, 62);
-			cPane.add(btnRetry);
-			
-			btnHome = new JButton(icon_menu);
-			btnHome.setBounds(889, 228, 153, 62);
-			cPane.add(btnHome);
+		btnHome = new JButton(icon_menu);
+		btnHome.setBounds(889, 228, 153, 62);
+		cPane.add(btnHome);
+		
+		if (mode.equals("menu")){
+			btnScore.setVisible(true);
+			btnHelp.setVisible(true);
+			btnPlay.setVisible(true);
+			btnTools.setVisible(true);
+			btnRetry.setVisible(false);
+			btnHome.setVisible(false);			
+		}else if(mode.equals("partie")) {
+			btnScore.setVisible(true);
+			btnHelp.setVisible(false);
+			btnPlay.setVisible(false);
+			btnTools.setVisible(false);
+			btnRetry.setVisible(true);
+			btnHome.setVisible(true);	
 		}
 	}
 
@@ -231,7 +225,7 @@ public class InputFrame extends JFrame{
 			DDB.setTitle("Table des scores");
 			
 			conn = connection();
-			ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score");
+			ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score ORDER BY Highscore");
 			String[] columnNames = {"Nom", "Highscore"};
 			
 			DefaultTableModel model = new DefaultTableModel(columnNames, 10);
@@ -251,7 +245,7 @@ public class InputFrame extends JFrame{
 			DDB.setVisible(true);
 			
 			conn.close();
-			GameContentPane.requestFocus();
+			if (lancerPartie) {GameContentPane.requestFocus();} 
 			
 	    } catch (SQLException ex) {
 	        ex.printStackTrace();
@@ -270,15 +264,6 @@ public class InputFrame extends JFrame{
 		Help.add(label);
 		Help.setVisible(true);
 		Help.setSize(600,440);
-	
-		/*JButton okButton = new JButton("OK");
-		okButton.addActionListener(new ActionListener() {
-		  public void actionPerformed(ActionEvent e) {
-			  Help.dispose();
-		  }
-		});
-		Help.add(okButton);*/
-		
 	}
 	
 	private void btnPushToolsListener(ActionEvent event) {
@@ -290,22 +275,27 @@ public class InputFrame extends JFrame{
 	
 	private void btnPushHomeListener(ActionEvent event) {
         //TODO 
-        if (GameContentPane != null) {
-        	GameContentPane.setVisible(false);
-        	GameContentPane.removeKeyListener(inputHandler);
-			contentPane.remove(GameContentPane);
+		int result = JOptionPane.showOptionDialog(null, "Etes-vous sur de vouloir quitter le jeu ? Vous allez perdre votre progression !", "Quitter le jeu", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
 
-        }
-        contentPane.removeAll();
-        lancerPartie = false; 
-		setContentPane(contentPane);
-		DisplayButton(contentPane, "menu");
-		contentPane.setFocusable(true);
-		contentPane.setVisible(true);
-		//firstframe.setVisible(true);
-	    ActionListenerButton();
-        repaint();
-        revalidate();
+		if (result == 0) { 
+			EnregistrerScore();
+	        if (GameContentPane != null) {
+	        	GameContentPane.setVisible(false);
+	        	GameContentPane.removeKeyListener(inputHandler);
+				contentPane.remove(GameContentPane);
+	        }
+	        contentPane.removeAll();
+	        lancerPartie = false; 
+			setContentPane(contentPane);
+			DisplayButton(contentPane, "menu");
+			contentPane.setFocusable(true);
+			contentPane.setVisible(true);
+			//firstframe.setVisible(true);
+		    ActionListenerButton();
+	        repaint();
+	        revalidate();
+		}
+		else GameContentPane.requestFocus();
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -316,7 +306,7 @@ public class InputFrame extends JFrame{
 		lancerPartie = true;
 		new SwingWorker() {
 			protected Object doInBackground() throws Exception {
-				while(lancerPartie==true && stage <11) {
+				while(lancerPartie && stage <11) {
 					switch(etatGameProcess) {
 					case 0:
 						//TODO Génération de la frame (niveau)
@@ -331,7 +321,7 @@ public class InputFrame extends JFrame{
 						GameContentPane.requestFocusInWindow();
 						GameContentPane.addKeyListener(inputHandler);
 						DisplayButton(getContentPane(), "partie"); 
-
+						
 					    ActionListenerButton();
 						setEtatGame(1); 
 						repaint();
@@ -341,6 +331,7 @@ public class InputFrame extends JFrame{
 						if (GameContentPane.isFinNiv() == true) {
 							System.out.println("Niv Terminé");
 							setEtatGame(2);
+							highscore += stage*10;
 							stage++;
 						}
 						else {
@@ -360,13 +351,29 @@ public class InputFrame extends JFrame{
 				}return null;
 			}
 		}.execute();
-		
+
+
 	}
 	
 	private void btnPushRetryListener(ActionEvent event) {
 		setEtatGame(0);
 	}
 		
+	private void EnregistrerScore(){
+		try {				
+			conn = connection();
+			String query = "INSERT INTO Score VALUES(?,?)";
+			PreparedStatement pst = conn.prepareStatement(query);
+			pst.setString(1, name);
+			pst.setInt(2, highscore);
+			pst.execute();
+			conn.close();
+				
+		} catch (SQLException ex) {
+		    ex.printStackTrace();
+		}
+	}
+	
 	public ImageIcon ResizeButton(ImageIcon icon, int w, int h) {
 		Image image = icon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(w, h,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
