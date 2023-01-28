@@ -27,6 +27,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JOptionPane;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -34,6 +35,7 @@ import java.awt.Shape;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
@@ -65,6 +67,7 @@ public class InputFrame extends JFrame{
 	public boolean lancerPartie = false;
 	public int  etatGameProcess = 0;
 	private Image background_menu;
+	private Container firstframe;
 
 	//private JLabel back=new JLabel(background_menu);
 	public Connection conn;	
@@ -115,7 +118,29 @@ public class InputFrame extends JFrame{
 	public InputFrame() {
 		
 		//adjust size+ add to Button ActionListener
-		sizingButton(); 
+		contentPane = new JPanel() {
+			private Image background_menu;
+		    @Override
+		    protected void paintComponent(Graphics g) {
+		        super.paintComponent(g);
+		        
+		        try {
+		        	background_menu = ImageIO.read(new File("menu.png"));
+			        g.drawImage(background_menu, 0, 0, getWidth(), getHeight(), this);
+		        }
+		        catch (IOException e) {
+		        	// TODO Auto-generated catch block
+		        	e.printStackTrace();
+		        };
+		    }
+		};   
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(0, 0, 1088, 483);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		firstframe = getContentPane();
+		DisplayButton(firstframe, "menu");  //getContentPane(), "menu"
 	    ActionListenerButton();
 
 	}
@@ -124,86 +149,67 @@ public class InputFrame extends JFrame{
 		GameThread.start();
 	}
 	@SuppressWarnings("serial")
-	private void sizingButton() {
-		//ImageIcon background_menu=new ImageIcon("menu.png");
-	    
-		ImageIcon icon_play = new ImageIcon("Play_Button.png");
-	    ImageIcon icon_help = new ImageIcon("Help_button.png");
-		ImageIcon icon_tools = new ImageIcon("Tools_Button.png");
-		ImageIcon icon_retry = new ImageIcon("Tools_Button.png"); // à créer comme bouton
-		ImageIcon icon_menu = new ImageIcon("Tools_Button.png"); // à créer comme bouton
-		ImageIcon background_game = new ImageIcon("background.png");
-		//set size button
-		icon_play = ResizeButton(icon_play,153,62);
-		icon_help = ResizeButton(icon_help,153,62);
-		icon_tools = ResizeButton(icon_tools,153,62);
-		icon_retry = ResizeButton(icon_retry,153,62);
-		icon_menu = ResizeButton(icon_menu,153,62);
-		//background_menu = ResizeGround(background_menu, 1074,446);
-		background_game = ResizeGround(background_game, 1074,446);
+	private void DisplayButton(Container cPane, String mode) {
+		ImageIcon icon_play = new ImageIcon("Icones/Play_Button.png");
+	    ImageIcon icon_help = new ImageIcon("Icones/Help_button.png");
+		ImageIcon icon_tools = new ImageIcon("Icones/Tools_Button.png");
+		ImageIcon icon_retry = new ImageIcon("Icones/Restart_Button.png"); // à créer comme bouton
+		ImageIcon icon_menu = new ImageIcon("Icones/Home_Button.png"); // à créer comme bouton
+		ImageIcon icon_score = new ImageIcon("Icones/Score_Button.png");
+		
+		icon_play = ResizeButton(icon_play,153,64);
+		icon_help = ResizeButton(icon_help,153,64);
+		icon_tools = ResizeButton(icon_tools,153,64);
+		icon_retry = ResizeButton(icon_retry,153,64);
+		icon_menu = ResizeButton(icon_menu,153,64);
+		icon_score = ResizeButton(icon_score, 153, 64);
+		switch (mode) {
+		case "menu":
+			
+			btnPlay = new JButton(icon_play);
+			buttonGroup.add(btnPlay);
+			btnPlay.setBounds(468, 300, 153, 62);
+			cPane.add(btnPlay);
+			
+			//Help
+			btnHelp= new JButton(icon_help);
+			btnHelp.setBounds(889, 300, 153, 62);
+			cPane.add(btnHelp);
 
-		//resize image for button
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1088, 483);
-		//contentPane = new JPanel();
-		
-		contentPane = new JPanel() {
-			private Image background_menu;
-		    @Override
-		    protected void paintComponent(Graphics g) {
-		        super.paintComponent(g);
-		        try {
-		        	background_menu = ImageIO.read(new File("menu.png"));
-			        g.drawImage(background_menu, 0, 0, getWidth(), getHeight(), this);
-		        }
-		        catch (IOException e) {
-		        	// TODO Auto-generated catch block
-		        	e.printStackTrace();
-			};
-		}};
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		btnScore = new JButton(icon_play);
-		buttonGroup.add(btnScore);
-		btnScore.setBounds(889, 84, 153, 62);
-		contentPane.add(btnScore);
-		
-		btnPlay = new JButton(icon_play);
-		buttonGroup.add(btnPlay);
-		btnPlay.setBounds(468, 300, 153, 62);
-		contentPane.add(btnPlay);
-		
-		//Help
-		btnHelp= new JButton(icon_help);
-		btnHelp.setBounds(889, 300, 153, 62);
-		contentPane.add(btnHelp);
+			//Tools
+			btnTools = new JButton(icon_tools);
+			btnTools.setBounds(889, 228, 153, 62);
+			cPane.add(btnTools);
+			
+			//
+			btnScore = new JButton(icon_score);
+			btnScore.setBounds(889, 156, 153, 62);
 
-		//Tools
-		btnTools = new JButton(icon_tools);
-		btnTools.setBounds(889, 228, 153, 62);
-		contentPane.add(btnTools);
+			buttonGroup.add(btnScore);
+			cPane.add(btnScore);
+			
+
+		case "partie":
+
+			btnScore = new JButton(icon_score);
+			btnScore.setBounds(889, 156, 153, 62);
+			buttonGroup.add(btnScore);
+			cPane.add(btnScore);
+			
+			//home			
+			btnRetry = new JButton(icon_retry);
+			btnRetry.setBounds(889, 300, 153, 62);
+			cPane.add(btnRetry);
+			
+			btnHome = new JButton(icon_menu);
+			btnHome.setBounds(889, 228, 153, 62);
+			cPane.add(btnHome);
+
+			
+		}
 		
-		//home
-		btnHome = new JButton(icon_menu);
-		btnHome.setBounds(889, 156, 153, 62);
-		contentPane.add(btnHome);
-		
-		//Retry
-		btnRetry = new JButton(icon_retry);
-		btnRetry.setBounds(889, 84, 153, 62);
-		btnHelp.setContentAreaFilled(false);
-		btnHelp.setBorderPainted(false);
-		btnRetry.setVisible(false);	
-		btnRetry.setEnabled(false);
-		contentPane.add(btnRetry);
-		
-		//background home
-		//back.setBounds(0,0,1074,446); 
-		//contentPane.add(back);
 	}
+
 	
 	private void ActionListenerButton() {
 		btnHelp.addActionListener(this:: btnPushHelpListener);
@@ -211,6 +217,8 @@ public class InputFrame extends JFrame{
 		btnHome.addActionListener(this::btnPushHomeListener);
 		btnPlay.addActionListener(this::btnPushPlayListener);
 		btnScore.addActionListener(this::btnPushScoreListener);
+		btnRetry.addActionListener(this::btnPushRetryListener);
+		
 		//set Cursor
 		btnScore.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnPlay.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -267,7 +275,23 @@ public class InputFrame extends JFrame{
 	private void btnPushHomeListener(ActionEvent event) {
 		name = JOptionPane.showInputDialog("Pour enregistrer votre score, veuillez entrer votre nom (unknow par defaut)");
         if (name.isEmpty()) {name = "Unknow";}
+        //TODO 
+        if (GameContentPane != null) {
+        	GameContentPane.setVisible(false);
+        	GameContentPane.removeKeyListener(inputHandler);
+			contentPane.remove(GameContentPane);
 
+        }
+        contentPane.removeAll();
+        lancerPartie = false; 
+		setContentPane(contentPane);
+		DisplayButton(contentPane, "menu");
+		contentPane.setFocusable(true);
+		contentPane.setVisible(true);
+		//firstframe.setVisible(true);
+	    ActionListenerButton();
+        repaint();
+        revalidate();
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -292,6 +316,9 @@ public class InputFrame extends JFrame{
 						GameContentPane.setFocusable(true);
 						GameContentPane.requestFocusInWindow();
 						GameContentPane.addKeyListener(inputHandler);
+						DisplayButton(getContentPane(), "partie"); 
+
+					    ActionListenerButton();
 						setEtatGame(1); 
 						repaint();
 						revalidate();
@@ -310,7 +337,7 @@ public class InputFrame extends JFrame{
 						GameContentPane.setVisible(false);
 						GameContentPane.setFocusable(false);
 						GameContentPane.removeKeyListener(inputHandler);
-						contentPane.remove(GameContentPane);;
+						contentPane.remove(GameContentPane);
 						stage++;
 						repaint();
 						revalidate();
@@ -322,7 +349,10 @@ public class InputFrame extends JFrame{
 		}.execute();
 		
 	}
-
+	
+	private void btnPushRetryListener(ActionEvent event) {
+		setEtatGame(0);
+	}
 		
 	public ImageIcon ResizeButton(ImageIcon icon, int w, int h) {
 		Image image = icon.getImage(); // transform it 
