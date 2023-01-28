@@ -1,14 +1,22 @@
 package sokoban_code;
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 
 import java.awt.event.ActionListener;
+import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.sql.*;
+import java.text.AttributedCharacterIterator;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JDialog;
@@ -17,14 +25,20 @@ import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JOptionPane;
+
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Shape;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
+
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 
 
@@ -49,7 +63,9 @@ public class InputFrame extends JFrame{
 	private int highscore = 0;
 	public static Thread GameThread;
 	public boolean lancerPartie = false;
-	
+	public int  etatGameProcess = 0;
+	private Image background_menu;
+
 	//private JLabel back=new JLabel(background_menu);
 	public Connection conn;	
 	
@@ -66,6 +82,7 @@ public class InputFrame extends JFrame{
 		return conn;
 	}
 	
+
 	/*public ResultSet LectureBBD() throws SQLException{
 		conn = connection();
 		ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score");
@@ -106,9 +123,11 @@ public class InputFrame extends JFrame{
 		GameThread = new Thread();
 		GameThread.start();
 	}
+	@SuppressWarnings("serial")
 	private void sizingButton() {
-		ImageIcon background_menu=new ImageIcon("menu.png");
-	    ImageIcon icon_play = new ImageIcon("Play_Button.png");
+		//ImageIcon background_menu=new ImageIcon("menu.png");
+	    
+		ImageIcon icon_play = new ImageIcon("Play_Button.png");
 	    ImageIcon icon_help = new ImageIcon("Help_button.png");
 		ImageIcon icon_tools = new ImageIcon("Tools_Button.png");
 		ImageIcon icon_retry = new ImageIcon("Tools_Button.png"); // à créer comme bouton
@@ -120,14 +139,29 @@ public class InputFrame extends JFrame{
 		icon_tools = ResizeButton(icon_tools,153,62);
 		icon_retry = ResizeButton(icon_retry,153,62);
 		icon_menu = ResizeButton(icon_menu,153,62);
-		background_menu = ResizeGround(background_menu, 1074,446);
+		//background_menu = ResizeGround(background_menu, 1074,446);
 		background_game = ResizeGround(background_game, 1074,446);
 
 		//resize image for button
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1088, 483);
-		contentPane = new JPanel();
+		//contentPane = new JPanel();
+		
+		contentPane = new JPanel() {
+			private Image background_menu;
+		    @Override
+		    protected void paintComponent(Graphics g) {
+		        super.paintComponent(g);
+		        try {
+		        	background_menu = ImageIO.read(new File("menu.png"));
+			        g.drawImage(background_menu, 0, 0, getWidth(), getHeight(), this);
+		        }
+		        catch (IOException e) {
+		        	// TODO Auto-generated catch block
+		        	e.printStackTrace();
+			};
+		}};
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -165,7 +199,6 @@ public class InputFrame extends JFrame{
 		btnRetry.setVisible(false);	
 		btnRetry.setEnabled(false);
 		contentPane.add(btnRetry);
-		
 		
 		//background home
 		//back.setBounds(0,0,1074,446); 
@@ -245,62 +278,49 @@ public class InputFrame extends JFrame{
 		lancerPartie = true;
 		new SwingWorker() {
 			protected Object doInBackground() throws Exception {
-				// TODO Auto-generated method stub
-				while(lancerPartie==true) {
-					m_partie.lancerNiveau(stage);
-					contentPane.setVisible(false);
-					
-					//frame for level
-					GameContentPane = new GraphicPlateau(m_partie,String.valueOf(stage));
-					//key for the game
-					inputHandler = new MyKeyEvent(m_partie);
-					setContentPane(GameContentPane);		
-					GameContentPane.setFocusable(true);
-					GameContentPane.requestFocusInWindow();
-					GameContentPane.addKeyListener(inputHandler);
-					while(!GameContentPane.isFinNiv()){
-						System.out.println("Information recue");
-						btnRetry.setVisible(true);		
-						btnRetry.setEnabled(true);
+				while(lancerPartie==true && stage <11) {
+					switch(etatGameProcess) {
+					case 0:
+						//TODO Génération de la frame (niveau)
+						m_partie.lancerNiveau(stage);
+						contentPane.setVisible(false);
+						//frame for level
+						GameContentPane = new GraphicPlateau(m_partie,String.valueOf(stage));
+						//key for the game
+						inputHandler = new MyKeyEvent(m_partie);
+						setContentPane(GameContentPane);		
+						GameContentPane.setFocusable(true);
+						GameContentPane.requestFocusInWindow();
+						GameContentPane.addKeyListener(inputHandler);
+						setEtatGame(1); 
+						repaint();
+						revalidate();
+						break;
+					case 1: 
+						if (GameContentPane.isFinNiv() == true) {
+							System.out.println("Niv Terminé");
+							setEtatGame(2);
+							stage++;
+						}
+						else {
+							System.out.println("Info reçue");
+						}break;
+					case 2 : 
+						//détruit le niveau et la configuration
+						GameContentPane.setVisible(false);
+						GameContentPane.setFocusable(false);
+						GameContentPane.removeKeyListener(inputHandler);
+						contentPane.remove(GameContentPane);;
+						stage++;
+						repaint();
+						revalidate();
+						setEtatGame(0);
+						break;	
 					}
-					//JFrame NiveauReussi = new JFrame();
-					highscore += 10*stage; 
-					//stage++;
-					repaint();
-					revalidate();
-					
-					
-				}
-				return null;
+				}return null;
 			}
 		}.execute();
 		
-		/**
-		m_partie.lancerNiveau(stage);
-		contentPane.setVisible(false);
-		//frame for level
-		GameContentPane = new GraphicPlateau(m_partie,String.valueOf(stage));
-		//key for the game
-		inputHandler = new MyKeyEvent(m_partie);;
-		setContentPane(GameContentPane);		
-		GameContentPane.setFocusable(true);
-		GameContentPane.requestFocusInWindow();
-		GameContentPane.addKeyListener(inputHandler);
-		
-		new SwingWorker() {
-			@Override
-			protected Object doInBackground() throws Exception {
-				// TODO Auto-generated method stub
-				while(true) {
-				while(!GameContentPane.isFinNiv()){
-					System.out.println("Information recue");
-					stage++;
-				}
-				return null;
-			}
-		}.execute();
-	    repaint();
-		*/
 	}
 
 		
@@ -314,5 +334,8 @@ public class InputFrame extends JFrame{
 		Image image = img.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(w, h,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		return new ImageIcon(newimg);  // transform it back
+	}
+	public void setEtatGame(int v) {
+		etatGameProcess = v;
 	}
 }
