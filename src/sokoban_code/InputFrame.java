@@ -68,6 +68,9 @@ public class InputFrame extends JFrame{
 	public int  etatGameProcess = 0;
 	private Image background_menu;
 	private Container firstframe;
+    private static MusicPlayer backgroundMusic;
+    private static MusicPlayer soundEffect;
+
 
 	//private JLabel back=new JLabel(background_menu);
 	public Connection conn;	
@@ -104,10 +107,9 @@ public class InputFrame extends JFrame{
 		frame.setVisible(true);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				//System.out.println("Test");
-//				while(GameThread!=null) {
-					
-//				}
+		        backgroundMusic = new MusicPlayer("sound/ambiance.wav");
+		        backgroundMusic.play();
+		        //soundEffect = new MusicPlayer("path_to_sound_effect.wav");
 			}
 		});
 	}
@@ -268,8 +270,10 @@ public class InputFrame extends JFrame{
 	}
 	
 	private void btnPushToolsListener(ActionEvent event) {
-		JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
-		JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
+		//JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
+		//JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
+		OptionsWindow options = new OptionsWindow();
+		options.show();
 	}
 	
 	private void btnPushHomeListener(ActionEvent event) {
