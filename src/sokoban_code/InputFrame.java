@@ -266,11 +266,11 @@ public class InputFrame extends JFrame{
 			ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score ORDER BY Highscore DESC LIMIT 5");
 			String[] columnNames = {"Nom", "Highscore"};
 			
-			DefaultTableModel model = new DefaultTableModel(columnNames, 5);
+			DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 			while(r.next()) {
 				String n = r.getString("Nom");
 				int s = r.getInt("Highscore");
-				model.insertRow(0,new Object[]{n,s});
+				model.addRow(new Object[]{n,s});
 			}
 			
 			JTable table = new JTable(model);
