@@ -14,7 +14,7 @@ public class Configuration {
   	 */
   	public Configuration(){
   	    m_niveauALancer = -1; //Par default, le niveau a lancer est -1, c'est a dire que rien ne se lance
-  	    File fichier = new File("codes.txt");
+  	    File fichier = new File("./niveau+codes/codes.txt");
 
 	    try {
 			Scanner scanner = new Scanner(fichier);
@@ -58,4 +58,11 @@ public class Configuration {
   	 * @param niv : entier contenant le nouveau niveau a lancer
   	 */
   	public void setNivALancer(int niv){m_niveauALancer = niv;}
+  	
+  	public int getNivAlancer(String code) {
+  		for (int i=0; i<m_nbNiveau; i++) {
+  			if (m_listeCodes[i].equals(code)) {m_niveauALancer = i+1; return m_niveauALancer;}
+  		}
+  		return 1;
+  	}
 }

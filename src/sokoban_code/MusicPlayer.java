@@ -10,6 +10,7 @@ import javax.sound.sampled.DataLine;
 
 public class MusicPlayer {
     private Clip clip;
+    private String state;
 
     public MusicPlayer(String fileName) {
         try {
@@ -27,12 +28,16 @@ public class MusicPlayer {
     public void play() {
         if (clip != null) {
             clip.start();
+            state = "play";
         }
     }
 
     public void stop() {
         if (clip != null) {
             clip.stop();
+            state = "stop";
         }
     }
+    
+    public String state() {return state;}
 }

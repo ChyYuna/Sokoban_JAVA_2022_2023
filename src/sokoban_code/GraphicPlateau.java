@@ -20,10 +20,12 @@ public class GraphicPlateau extends JComponent{
 	public Partie partie_aff;
 	private String level; 
 	private boolean finNiv;
+	private String code;
 
-	public GraphicPlateau(Partie m_partie, String m_level) {
+	public GraphicPlateau(Partie m_partie, String m_level, String m_code) {
 		partie_aff = m_partie;
 		level= m_level;
+		code = m_code;
 		setFinNiv(partie_aff.victoire());
 
 	} 
@@ -76,6 +78,7 @@ public class GraphicPlateau extends JComponent{
 		Font fonte = new Font("TimesRoman ",Font.BOLD,30);
 		graphics.setFont(fonte);
 		graphics.drawString("Niveau " + level, 50,50);
+		graphics.drawString("Code : " + code, 50, 80);
 		setFinNiv(partie_aff.victoire());
 		repaint();	    
 	}

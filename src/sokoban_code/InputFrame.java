@@ -36,6 +36,7 @@ import java.awt.Shape;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 
 import java.awt.event.ActionEvent;
@@ -56,9 +57,12 @@ public class InputFrame extends JFrame{
 	private JButton btnPlay = new JButton();
 	private JButton btnScore = new JButton();
 	private JButton btnHelp= new JButton();
-	private JButton btnTools = new JButton();
+	private JButton btnLoad = new JButton();
 	private JButton btnHome = new JButton();
 	private JButton btnRetry = new JButton();
+    private JCheckBox musicCheckBox = new JCheckBox();
+    private Configuration configLevel = new Configuration();    
+    
 	private MyKeyEvent inputHandler = new MyKeyEvent(new Partie());
 	private int stage = 1;
 	private String name;
@@ -66,10 +70,13 @@ public class InputFrame extends JFrame{
 	public static Thread GameThread;
 	public boolean lancerPartie = false;
 	public int  etatGameProcess = 0;
-	private Container firstframe;
-    private static MusicPlayer backgroundMusic;
-    private static MusicPlayer soundEffect;
-    private static ImageIcon iconResult;
+	private Container firstframe; // ? 
+    private static MusicPlayer backgroundMusic; 
+    private static MusicPlayer soundEffect;//?
+    private static ImageIcon iconResult; //?
+    
+    
+    
 
 	//private JLabel back=new JLabel(background_menu);
 	public Connection conn;	
@@ -98,7 +105,7 @@ public class InputFrame extends JFrame{
 		frame.setVisible(true);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-		        //backgroundMusic = new MusicPlayer("sound/ambiance.wav");
+		        backgroundMusic = new MusicPlayer("sound/ambiance.wav");
 		        //backgroundMusic.play();
 		        //soundEffect = new MusicPlayer("path_to_sound_effect.wav");
 			}
@@ -148,14 +155,15 @@ public class InputFrame extends JFrame{
 	private void DisplayButton(Container cPane, String mode) {
 		ImageIcon icon_play = new ImageIcon("Icones/Play_Button.png");
 	    ImageIcon icon_help = new ImageIcon("Icones/Help_button.png");
-		ImageIcon icon_tools = new ImageIcon("Icones/Tools_Button.png");
+		ImageIcon icon_load = new ImageIcon("Icones/Load_Button.png");
 		ImageIcon icon_retry = new ImageIcon("Icones/Restart_Button.png"); // à créer comme bouton
 		ImageIcon icon_menu = new ImageIcon("Icones/Home_Button.png"); // à créer comme bouton
 		ImageIcon icon_score = new ImageIcon("Icones/Score_Button.png");
-		
+		ImageIcon icon_music_enabled = new ImageIcon("Icones/volume-max.png");
+		ImageIcon icon_music_disabled = new ImageIcon("Icones/volume-x.png");
 		icon_play = ResizeButton(icon_play,153,64);
 		icon_help = ResizeButton(icon_help,153,64);
-		icon_tools = ResizeButton(icon_tools,153,64);
+		icon_load = ResizeButton(icon_load,153,64);
 		icon_retry = ResizeButton(icon_retry,153,64);
 		icon_menu = ResizeButton(icon_menu,153,64);
 		icon_score = ResizeButton(icon_score, 153, 64);
@@ -168,9 +176,9 @@ public class InputFrame extends JFrame{
 		btnHelp.setBounds(889, 300, 153, 62);
 		cPane.add(btnHelp);
 		
-		btnTools = new JButton(icon_tools);
-		btnTools.setBounds(889, 228, 153, 62);
-		cPane.add(btnTools);
+		btnLoad = new JButton(icon_load);
+		btnLoad.setBounds(889, 228, 153, 62);
+		cPane.add(btnLoad);
 			
 		btnScore = new JButton(icon_score);
 		btnScore.setBounds(889, 156, 153, 62);
@@ -184,18 +192,29 @@ public class InputFrame extends JFrame{
 		btnHome.setBounds(889, 228, 153, 62);
 		cPane.add(btnHome);
 		
+		musicCheckBox = new JCheckBox();
+		musicCheckBox.setBounds(889, 50, 50, 50);
+		if (backgroundMusic !=null) {
+			if (backgroundMusic.state()=="play") {musicCheckBox.setIcon(icon_music_disabled);}
+			else{musicCheckBox.setIcon(icon_music_disabled);}
+		}else {musicCheckBox.setIcon(icon_music_disabled);}
+        musicCheckBox.setOpaque(false);
+        cPane.add(musicCheckBox);
+		
+		
+
 		if (mode.equals("menu")){
 			btnScore.setVisible(true);
 			btnHelp.setVisible(true);
 			btnPlay.setVisible(true);
-			btnTools.setVisible(true);
+			btnLoad.setVisible(true);
 			btnRetry.setVisible(false);
-			btnHome.setVisible(false);			
+			btnHome.setVisible(false);		
 		}else if(mode.equals("partie")) {
 			btnScore.setVisible(true);
 			btnHelp.setVisible(false);
 			btnPlay.setVisible(false);
-			btnTools.setVisible(false);
+			btnLoad.setVisible(false);
 			btnRetry.setVisible(true);
 			btnHome.setVisible(true);	
 		}
@@ -204,21 +223,39 @@ public class InputFrame extends JFrame{
 	
 	private void ActionListenerButton() {
 		btnHelp.addActionListener(this:: btnPushHelpListener);
-		btnTools.addActionListener(this::btnPushToolsListener);
+		btnLoad.addActionListener(this::btnPushLoadListener);
 		btnHome.addActionListener(this::btnPushHomeListener);
 		btnPlay.addActionListener(this::btnPushPlayListener);
 		btnScore.addActionListener(this::btnPushScoreListener);
 		btnRetry.addActionListener(this::btnPushRetryListener);
+		musicCheckBox.addActionListener(this::PushMusicListener);
 		
 		//set Cursor
 		btnScore.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnPlay.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnHelp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnTools.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnLoad.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRetry.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 	}
+	
+	private void PushMusicListener(ActionEvent event) {
+		ImageIcon icon_music_enabled = new ImageIcon("Icones/volume-max.png");
+		ImageIcon icon_music_disabled = new ImageIcon("Icones/volume-x.png");
+		if (musicCheckBox.isSelected()) {
+			//play music
+			musicCheckBox.setIcon(icon_music_enabled);
+			backgroundMusic.play();
+		}
+		else {
+			musicCheckBox.setIcon(icon_music_disabled);
+			backgroundMusic.stop();
+		}
+		if (lancerPartie) {GameContentPane.requestFocus();} 
+
+	}
+	
 	
 	private void btnPushScoreListener(ActionEvent event) {
 		try {
@@ -253,6 +290,17 @@ public class InputFrame extends JFrame{
 	    }
 	}
 	
+	public void MusicEnabled(Container cPane) {
+	    JCheckBox musicCheckBox;
+        musicCheckBox = new JCheckBox();
+        musicCheckBox.setBounds(889, 10, 40, 40);
+        musicCheckBox.setIcon(iconResult);
+        cPane.add(musicCheckBox);
+        JLabel musicLabel = new JLabel("Activate music:");
+        cPane.add(musicLabel);
+        cPane.setVisible(true);
+	}
+	
 	private void btnPushHelpListener(ActionEvent event) {
 		JDialog Help = new JDialog();
 		Help.setTitle("Aide");
@@ -267,11 +315,11 @@ public class InputFrame extends JFrame{
 		Help.setSize(600,440);
 	}
 	
-	private void btnPushToolsListener(ActionEvent event) {
+	private void btnPushLoadListener(ActionEvent event) { // Pourquoi avoir crée Configuration? 
 		//JFrame newframe = new JFrame("JOptionPane showMessageDialog example");
 		//JOptionPane.showMessageDialog(newframe,"A basic JOptionPane message dialog");
-		OptionsWindow options = new OptionsWindow();
-		options.show();
+		String StageCode = JOptionPane.showInputDialog("Veuillez saisir le mot de passe");
+		stage = configLevel.getNivAlancer(StageCode);
 	}
 	
 	private void btnPushHomeListener(ActionEvent event) {
@@ -282,9 +330,13 @@ public class InputFrame extends JFrame{
 			EnregistrerScore();
 	        if (GameContentPane != null) {
 	        	GameContentPane.setVisible(false);
+				GameContentPane.setFocusable(false); //?
 	        	GameContentPane.removeKeyListener(inputHandler);
 				contentPane.remove(GameContentPane);
+
 	        }
+			setEtatGame(0);
+
 	        contentPane.removeAll();
 	        lancerPartie = false; 
 			setContentPane(contentPane);
@@ -315,7 +367,7 @@ public class InputFrame extends JFrame{
 						m_partie.lancerNiveau(stage);
 						contentPane.setVisible(false);
 						//frame for level
-						GameContentPane = new GraphicPlateau(m_partie,String.valueOf(stage));
+						GameContentPane = new GraphicPlateau(m_partie,String.valueOf(stage), configLevel.getListeCodes()[stage]);
 						//key for the game
 						inputHandler = new MyKeyEvent(m_partie);
 						setContentPane(GameContentPane);		
@@ -337,7 +389,7 @@ public class InputFrame extends JFrame{
 							
 							
 							//if lastLevel finished
-							if (stage+1 == 2) {
+							if (stage+1 >= 11) {
 								JOptionPane.showMessageDialog(null,"Bravo, vous avez terminé Sokoban Master Quest !");
 								continueB = 1;
 							}
@@ -365,7 +417,7 @@ public class InputFrame extends JFrame{
 							}
 						}
 						else {
-							System.out.println("Info reçue");
+							//System.out.println("Info reçue");
 						}break;
 					case 2 : 
 						//détruit le niveau et la configuration
