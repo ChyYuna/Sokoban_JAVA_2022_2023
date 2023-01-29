@@ -52,7 +52,6 @@ public class InputFrame extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private final Partie m_partie = new Partie();
 	private JPanel contentPane;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private GraphicPlateau GameContentPane;
 	private JButton btnPlay = new JButton();
 	private JButton btnScore = new JButton();
@@ -67,11 +66,10 @@ public class InputFrame extends JFrame{
 	public static Thread GameThread;
 	public boolean lancerPartie = false;
 	public int  etatGameProcess = 0;
-	private Image background_menu;
 	private Container firstframe;
     private static MusicPlayer backgroundMusic;
     private static MusicPlayer soundEffect;
-
+    private static ImageIcon iconResult;
 
 	//private JLabel back=new JLabel(background_menu);
 	public Connection conn;	
@@ -100,8 +98,8 @@ public class InputFrame extends JFrame{
 		frame.setVisible(true);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-		        backgroundMusic = new MusicPlayer("sound/ambiance.wav");
-		        backgroundMusic.play();
+		        //backgroundMusic = new MusicPlayer("sound/ambiance.wav");
+		        //backgroundMusic.play();
 		        //soundEffect = new MusicPlayer("path_to_sound_effect.wav");
 			}
 		});
@@ -137,6 +135,9 @@ public class InputFrame extends JFrame{
 		firstframe = getContentPane();
 		DisplayButton(firstframe, "menu");  //getContentPane(), "menu"
 	    ActionListenerButton();
+	    
+		iconResult = new ImageIcon("Icones/congratulation.png");
+		iconResult = ResizeButton(iconResult, 40, 40);
 
 	}
 	public void StartThread() {
@@ -332,7 +333,25 @@ public class InputFrame extends JFrame{
 							System.out.println("Niv Terminé");
 							setEtatGame(2);
 							highscore += stage*10;
-							stage++;
+							int result = JOptionPane.showOptionDialog(null, "Niveau Terminé! Continuez ?", "Niveau terminé", JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE, iconResult, null, null);
+							if (result == 1) {
+								EnregistrerScore();
+								stage = 1;
+								contentPane.removeAll();
+						        lancerPartie = false; 
+								setContentPane(contentPane);
+								DisplayButton(contentPane, "menu");
+								contentPane.setFocusable(true);
+								contentPane.setVisible(true);
+								//firstframe.setVisible(true);
+							    ActionListenerButton();
+						        repaint();
+						        revalidate();
+							}
+							else {
+								stage++;
+
+							}
 						}
 						else {
 							System.out.println("Info reçue");
@@ -349,6 +368,8 @@ public class InputFrame extends JFrame{
 						break;	
 					}
 				}return null;
+				
+				
 			}
 		}.execute();
 
