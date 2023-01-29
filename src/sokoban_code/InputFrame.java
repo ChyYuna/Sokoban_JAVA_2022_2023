@@ -311,6 +311,7 @@ public class InputFrame extends JFrame{
 					switch(etatGameProcess) {
 					case 0:
 						//TODO Génération de la frame (niveau)
+						int continueB = 0; // 
 						m_partie.lancerNiveau(stage);
 						contentPane.setVisible(false);
 						//frame for level
@@ -333,8 +334,18 @@ public class InputFrame extends JFrame{
 							System.out.println("Niv Terminé");
 							setEtatGame(2);
 							highscore += stage*10;
-							int result = JOptionPane.showOptionDialog(null, "Niveau Terminé! Continuez ?", "Niveau terminé", JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE, iconResult, null, null);
-							if (result == 1) {
+							
+							
+							//if lastLevel finished
+							if (stage+1 == 2) {
+								JOptionPane.showMessageDialog(null,"Bravo, vous avez terminé Sokoban Master Quest !");
+								continueB = 1;
+							}
+							else {
+								//For each Level, give the possibility to leave / continue game
+								continueB = JOptionPane.showOptionDialog(null, "Niveau Terminé! Continuez ?", "Niveau terminé", JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE, iconResult, null, null);
+							}
+							if (continueB == 1) {
 								EnregistrerScore();
 								stage = 1;
 								contentPane.removeAll();
@@ -368,8 +379,6 @@ public class InputFrame extends JFrame{
 						break;	
 					}
 				}return null;
-				
-				
 			}
 		}.execute();
 
