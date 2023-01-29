@@ -263,7 +263,7 @@ public class InputFrame extends JFrame{
 			DDB.setTitle("Table des scores");
 			
 			conn = connection();
-			ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score ORDER BY Highscore");
+			ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score ORDER BY Highscore DESC limit 3");
 			String[] columnNames = {"Nom", "Highscore"};
 			
 			DefaultTableModel model = new DefaultTableModel(columnNames, 10);
