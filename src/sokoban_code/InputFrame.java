@@ -175,7 +175,7 @@ public class InputFrame extends JFrame {
 		musicCheckBox.setBounds(889, 50, 50, 50);
 		if (backgroundMusic != null) {
 			if (backgroundMusic.state() == "play") {
-				musicCheckBox.setIcon(icon_music_disabled);
+				musicCheckBox.setIcon(icon_music_enabled);
 			} else {
 				musicCheckBox.setIcon(icon_music_disabled);
 			}
@@ -397,7 +397,7 @@ public class InputFrame extends JFrame {
 							contentPane.setVisible(false);
 							// frame for level
 							GameContentPane = new GraphicPlateau(m_partie, String.valueOf(stage),
-									configLevel.getListeCodes()[stage]);
+									configLevel.getListeCodes()[stage-1]);
 							// key for the game
 							inputHandler = new MyKeyEvent(m_partie);
 							setContentPane(GameContentPane);

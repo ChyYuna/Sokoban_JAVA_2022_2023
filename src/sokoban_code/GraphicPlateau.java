@@ -68,8 +68,14 @@ public class GraphicPlateau extends JComponent {
 				}
 				if (partie_aff.getPlateauElt(x, y) == '.') {
 					graphics.drawImage(marquee_img, 50 + 40 * x, 100 + 40 * y, this);
-
 				}
+				if (partie_aff.getPlateauElt(x, y) == '*') {
+					graphics.drawImage(marquee_img, 50 + 40 * x, 100 + 40 * y, this);
+				}
+				if (partie_aff.getPlateauElt(x, y) == '+') {
+					graphics.drawImage(marquee_img, 50 + 40 * x, 100 + 40 * y, this);
+				}
+
 			}
 		}
 		for (int i = 0; i < partie_aff.getNbCaisses(); i++) {
