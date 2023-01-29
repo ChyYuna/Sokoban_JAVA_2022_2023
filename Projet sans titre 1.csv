@@ -1,0 +1,10 @@
+ID,Nom,Date de début,Date de fin,Durée,Avancée,Coût,Responsable,Prédécesseurs,Numéro hiérarchique,Ressources,Assignments,Nouvelle tâche,Lien internet,Notes
+0,Prise en main du projet Sokoban en C++ / QT,07/11/2022,25/11/2022,15,0,0,,,1,,,,,
+1,Formation sur Java Swing,14/11/2022,01/12/2022,14,0,0,,,2,,,,,
+2,Formation sur SQLite,01/12/2022,20/12/2022,14,0,0,,,3,,,,,
+3,GitHub : Prise en main,07/11/2022,15/11/2022,7,0,0,,,4,,,,,
+4,GitHub : Rapport semi-projet,14/11/2022,26/12/2022,31,0,0,,,5,,,,,
+5,Java: Implémentation des classes,14/11/2022,09/12/2022,20,0,0,,,6,,,,,
+6,Java : Implémentation des interfaces,09/12/2022,20/01/2023,31,0,0,,,7,,,,,
+7,Java : Implementation de SQLite,13/01/2023,23/01/2023,7,0,0,,,8,,,,,
+8,Java : Fonctionnalités optionnelles,24/01/2023,26/01/2023,3,0,0,,,9,,,,,
