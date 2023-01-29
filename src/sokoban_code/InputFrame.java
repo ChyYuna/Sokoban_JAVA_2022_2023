@@ -263,10 +263,10 @@ public class InputFrame extends JFrame{
 			DDB.setTitle("Table des scores");
 			
 			conn = connection();
-			ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score ORDER BY Highscore DESC limit 3");
+			ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score ORDER BY Highscore DESC LIMIT 5");
 			String[] columnNames = {"Nom", "Highscore"};
 			
-			DefaultTableModel model = new DefaultTableModel(columnNames, 10);
+			DefaultTableModel model = new DefaultTableModel(columnNames, 5);
 			while(r.next()) {
 				String n = r.getString("Nom");
 				int s = r.getInt("Highscore");
@@ -394,7 +394,7 @@ public class InputFrame extends JFrame{
 							else {
 								//For each Level, give the possibility to leave / continue game
 								continueB = JOptionPane.showOptionDialog(null, "Niveau Terminé! Continuez ?", "Niveau terminé", JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE, iconResult, null, null);
-								System.out.print(continueB);
+//								System.out.print(continueB);
 							}
 							if (continueB == 1) {
 								EnregistrerScore();
@@ -416,7 +416,7 @@ public class InputFrame extends JFrame{
 							}
 						}
 						else {
-							System.out.println("");
+								System.out.println("");
 						}break;
 					case 2 : 
 						//détruit le niveau et la configuration
