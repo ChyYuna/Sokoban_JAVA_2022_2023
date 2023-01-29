@@ -36,7 +36,7 @@ public class GraphicPlateau extends JComponent{
 		super.paintComponent(graphics);
 		
 		try {
-			background_game = ImageIO.read(new File("background.png"));
+			background_game = ImageIO.read(new File("./Ground/background.png"));
 			mur_img = ImageIO.read(new File("Autres/mur.png"));
 			vide_img = ImageIO.read(new File("Autres/Vide.png"));
 			marquee_img = ImageIO.read(new File("Autres/cible.png"));

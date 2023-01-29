@@ -125,7 +125,7 @@ public class InputFrame extends JFrame{
 		        super.paintComponent(g);
 		        
 		        try {
-		        	background_menu = ImageIO.read(new File("menu.png"));
+		        	background_menu = ImageIO.read(new File("./Ground/menu.png"));
 			        g.drawImage(background_menu, 0, 0, getWidth(), getHeight(), this);
 		        }
 		        catch (IOException e) {
@@ -305,7 +305,7 @@ public class InputFrame extends JFrame{
 		JDialog Help = new JDialog();
 		Help.setTitle("Aide");
 		JLabel label = new JLabel();
-		ImageIcon icon = new ImageIcon("aide_Sokoban.png");
+		ImageIcon icon = new ImageIcon("./Aide/aide_Sokoban.png");
 		Image img = icon.getImage();
 		Image newImage = img.getScaledInstance(600, 400, Image.SCALE_SMOOTH);
 		ImageIcon newIcon = new ImageIcon(newImage);
@@ -328,6 +328,15 @@ public class InputFrame extends JFrame{
 
 		if (result == 0) { 
 			EnregistrerScore();
+	        lancerPartie = false;
+	        contentPane.removeAll();
+			setContentPane(contentPane);
+			DisplayButton(contentPane, "menu");
+			contentPane.setFocusable(true);
+			contentPane.setVisible(true);
+			//firstframe.setVisible(true);
+
+			setEtatGame(0);
 	        if (GameContentPane != null) {
 	        	GameContentPane.setVisible(false);
 				GameContentPane.setFocusable(false); //?
@@ -335,15 +344,7 @@ public class InputFrame extends JFrame{
 				contentPane.remove(GameContentPane);
 
 	        }
-			setEtatGame(0);
-
-	        contentPane.removeAll();
-	        lancerPartie = false; 
-			setContentPane(contentPane);
-			DisplayButton(contentPane, "menu");
-			contentPane.setFocusable(true);
-			contentPane.setVisible(true);
-			//firstframe.setVisible(true);
+	        stage = 1;
 		    ActionListenerButton();
 	        repaint();
 	        revalidate();
