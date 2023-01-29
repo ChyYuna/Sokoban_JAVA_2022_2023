@@ -263,14 +263,19 @@ public class InputFrame extends JFrame{
 			DDB.setTitle("Table des scores");
 			
 			conn = connection();
-			ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score ORDER BY Highscore DESC LIMIT 5");
+			ResultSet r = conn.createStatement().executeQuery("SELECT * FROM Score ORDER BY Highscore DESC");
 			String[] columnNames = {"Nom", "Highscore"};
 			
 			DefaultTableModel model = new DefaultTableModel(columnNames, 5);
+			int limit = 5;
+			int row = 0;
 			while(r.next()) {
-				String n = r.getString("Nom");
-				int s = r.getInt("Highscore");
-				model.insertRow(0,new Object[]{n,s});
+				if (row <limit) {
+					String n = r.getString("Nom");
+					int s = r.getInt("Highscore");
+					model.insertRow(0,new Object[]{n,s});
+					row++;
+				}
 			}
 			
 			JTable table = new JTable(model);
@@ -328,6 +333,15 @@ public class InputFrame extends JFrame{
 
 		if (result == 0) { 
 			EnregistrerScore();
+	        lancerPartie = false;
+	        contentPane.removeAll();
+			setContentPane(contentPane);
+			DisplayButton(contentPane, "menu");
+			contentPane.setFocusable(true);
+			contentPane.setVisible(true);
+			//firstframe.setVisible(true);
+
+			setEtatGame(0);
 	        if (GameContentPane != null) {
 	        	GameContentPane.setVisible(false);
 				GameContentPane.setFocusable(false); //?
@@ -335,15 +349,7 @@ public class InputFrame extends JFrame{
 				contentPane.remove(GameContentPane);
 
 	        }
-			setEtatGame(0);
-
-	        contentPane.removeAll();
-	        lancerPartie = false; 
-			setContentPane(contentPane);
-			DisplayButton(contentPane, "menu");
-			contentPane.setFocusable(true);
-			contentPane.setVisible(true);
-			//firstframe.setVisible(true);
+	        stage = 1;
 		    ActionListenerButton();
 	        repaint();
 	        revalidate();
